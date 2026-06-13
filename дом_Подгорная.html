@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дом 161,8 м² на участке 7,1 сот. — Подгорная</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root {
+  --body-bg: #f8f9fa;
+  --card-bg: #fff;
+  --text-color: #222;
+  --header-bg: rgba(255,255,255,0.97);
+  --header-border: rgba(0,0,0,0.06);
+  --stat-card-bg: #f8f9fa;
+  --feature-bg: #f8f9fa;
+  --spec-odd: #fafafa;
+  --spec-border: #f0f0f0;
+  --price-color: #0b7e8c;
+  --stat-value-color: #222;
+  --section-title-color: #111;
+  --desc-text: #444;
+  --spec-label: #888;
+  --hero-counter-bg: rgba(0,0,0,0.6);
+  --hero-arrow-bg: rgba(255,255,255,0.85);
+  --hero-arrow-color: #333;
+  --hero-arrow-hover-bg: #fff;
+  --mortgage-pill-bg: #e6f4f6;
+  --mortgage-pill-text: #0b7e8c;
+  --contact-bg: #fff;
+  --map-placeholder-bg: #e9ecef;
+  --share-btn-bg: #f0f0f0;
+  --share-btn-hover-bg: #e0e0e0;
+  --lightbox-bg: rgba(0,0,0,0.92);
+  --lightbox-btn-color: #fff;
+}
+[data-theme="dark"] {
+  --body-bg: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --header-bg: rgba(30,30,30,0.97);
+  --header-border: rgba(255,255,255,0.08);
+  --stat-card-bg: #2a2a2a;
+  --feature-bg: #2a2a2a;
+  --spec-odd: #2a2a2a;
+  --spec-border: #333;
+  --price-color: #20b2aa;
+  --stat-value-color: #e0e0e0;
+  --section-title-color: #eee;
+  --desc-text: #bbb;
+  --spec-label: #aaa;
+  --hero-counter-bg: rgba(0,0,0,0.8);
+  --hero-arrow-bg: rgba(50,50,50,0.9);
+  --hero-arrow-color: #eee;
+  --hero-arrow-hover-bg: #555;
+  --mortgage-pill-bg: #1a3a3a;
+  --mortgage-pill-text: #4dd0e1;
+  --contact-bg: #1e1e1e;
+  --map-placeholder-bg: #2a2a2a;
+  --share-btn-bg: #333;
+  --share-btn-hover-bg: #444;
+  --lightbox-bg: rgba(0,0,0,0.95);
+  --lightbox-btn-color: #ccc;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--body-bg);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--header-bg); border-bottom: 1px solid var(--header-border);
+  backdrop-filter: blur(12px); padding: 10px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-logo { font-size: 20px; }
+.header-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
+.header-subtitle { font-size: 12px; color: var(--spec-label); }
+.header-right { display: flex; align-items: center; gap: 8px; }
+#themeToggle {
+  background: none; border: none; font-size: 24px;
+  cursor: pointer; padding: 6px; border-radius: 50%;
+  transition: background 0.2s; line-height: 1;
+}
+#themeToggle:hover { background: var(--share-btn-bg); }
+.status-badge {
+  display: inline-block; background: #27ae60; color: #fff;
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  border-radius: 20px; letter-spacing: 0.3px;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.hero {
+  margin-top: 60px; position: relative; width: 100%; height: 55vh;
+  min-height: 350px; overflow: hidden;
+}
+.hero img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  padding: 30px 20px; text-align: center;
+}
+.hero-overlay span {
+  color: #fff; font-size: 16px; font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.section { padding: 40px 0; }
+.section-title {
+  font-size: 28px; font-weight: 700; color: var(--section-title-color);
+  margin-bottom: 24px; padding-bottom: 10px;
+  border-bottom: 3px solid #0174FC; display: inline-block;
+}
+.card { background: var(--card-bg); border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 32px; margin-bottom: 20px; }
+.price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; margin-bottom: 28px; }
+.price { font-size: 42px; font-weight: 800; color: var(--price-color); }
+.price-label { font-size: 16px; color: var(--spec-label); font-weight: 400; }
+.price-per-meter { font-size: 20px; font-weight: 600; color: var(--text-color); }
+.mortgage-pill {
+  display: inline-block; background: var(--mortgage-pill-bg); color: var(--mortgage-pill-text);
+  font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 24px;
+}
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--stat-card-bg); border-radius: 14px; padding: 18px 16px;
+  text-align: center; transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-2px); }
+.stat-icon {
+  width: 44px; height: 44px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 20px; margin: 0 auto 10px;
+}
+.stat-icon.blue { background: #e3f0ff; } .stat-icon.green { background: #e3f9e5; }
+.stat-icon.orange { background: #fff3e0; } .stat-icon.pink { background: #fce4ec; }
+.stat-icon.purple { background: #f3e5f5; } .stat-icon.cyan { background: #e0f7fa; }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--spec-label); margin-bottom: 4px; }
+.stat-value { font-size: 20px; font-weight: 700; color: var(--stat-value-color); }
+.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.feature-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--feature-bg); padding: 12px 16px; border-radius: 12px;
+  font-size: 14px; color: var(--text-color);
+}
+.feature-check { color: #27ae60; font-weight: 700; font-size: 18px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.gallery-item {
+  aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; cursor: pointer;
+  transition: transform 0.3s; position: relative;
+}
+.gallery-item:hover { transform: scale(1.03); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.desc-text { font-size: 16px; line-height: 1.8; color: var(--desc-text); }
+.desc-text p { margin-bottom: 12px; }
+.desc-text ul { list-style: none; padding: 0; margin-bottom: 12px; }
+.desc-text ul li { padding: 4px 0 4px 20px; position: relative; }
+.desc-text ul li::before { content: "•"; position: absolute; left: 0; color: #0174FC; font-weight: 700; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.spec-row {
+  display: flex; justify-content: space-between; padding: 10px 16px;
+  border-bottom: 1px solid var(--spec-border);
+}
+.spec-row:nth-child(odd) { background: var(--spec-odd); }
+.spec-label { color: var(--spec-label); font-size: 14px; }
+.spec-value { font-weight: 600; color: var(--text-color); font-size: 14px; }
+.contact-section { text-align: center; padding: 32px; background: var(--contact-bg); border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+.contact-name { font-size: 20px; font-weight: 700; color: var(--text-color); margin-bottom: 8px; }
+.contact-phone { font-size: 24px; font-weight: 700; color: #0174FC; }
+.contact-phone a { color: #0174FC; text-decoration: none; }
+.contact-phone a:hover { text-decoration: underline; }
+.footer { text-align: center; padding: 32px 16px; color: var(--spec-label); font-size: 13px; line-height: 1.8; }
+.lightbox {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--lightbox-bg); z-index: 1000;
+  justify-content: center; align-items: center;
+}
+.lightbox.open { display: flex; }
+.lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+.lightbox-close {
+  position: absolute; top: 20px; right: 28px; font-size: 36px;
+  color: var(--lightbox-btn-color); cursor: pointer; background: none; border: none;
+  z-index: 1001;
+}
+.lightbox-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 48px; color: var(--lightbox-btn-color); cursor: pointer;
+  background: none; border: none; padding: 12px 16px; z-index: 1001;
+  transition: opacity 0.2s; opacity: 0.7;
+}
+.lightbox-arrow:hover { opacity: 1; }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+@media (max-width: 768px) {
+  .header { padding: 8px 12px; }
+  .header-subtitle { display: none; }
+  .hero { height: 40vh; min-height: 280px; }
+  .section { padding: 24px 0; }
+  .card { padding: 20px; }
+  .price { font-size: 32px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .features-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .specs-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 22px; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .price-row { gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <span class="header-logo">🏠</span>
+    <span class="status-badge">Продажа</span>
+    <div>
+      <div class="header-title">Дом 161,8 м² · 7,1 сот.</div>
+      <div class="header-subtitle">Подгорная ул., Старый Оскол</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <button id="themeToggle" onclick="toggleTheme()">🌙</button>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Дом" loading="eager">
+  <div class="hero-overlay"><span>📸 Фотогалерея снизу ↓</span></div>
+</section>
+
+<div class="container">
+  <section class="section">
+    <div class="card">
+      <div class="price-row">
+        <span class="price">6 290 000 ₽</span>
+        <span class="price-label">за объект</span>
+        <span class="price-per-meter">38 875 ₽/м²</span>
+        <span class="mortgage-pill">🏦 В ипотеку от 71 358 ₽/мес</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">🛏️</div>
+          <div class="stat-label">Спальни</div>
+          <div class="stat-value">6</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">📐</div>
+          <div class="stat-label">Площадь дома</div>
+          <div class="stat-value">161,8 м²</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">🏡</div>
+          <div class="stat-label">Участок</div>
+          <div class="stat-value">7,1 сот.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon pink">🏗️</div>
+          <div class="stat-label">Этажей</div>
+          <div class="stat-value">2</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">🧱</div>
+          <div class="stat-label">Материал стен</div>
+          <div class="stat-value">Кирпич</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon cyan">🚿</div>
+          <div class="stat-label">Санузел</div>
+          <div class="stat-value">Раздельный</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">✅ Преимущества</h2>
+    <div class="features-grid">
+      <div class="feature-item"><span class="feature-check">✓</span> Кирпичный дом</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Окна ПВХ</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Новые радиаторы отопления</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Два кондиционера</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Межкомнатные двери в едином стиле</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Отдельная котельная и хоз.постройка</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Санузел облицован кафелем до потолка</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Кухонный гарнитур и газовая плита</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Газ, электричество, центральная вода</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Асфальтированная дорога</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Остановка рядом</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Возможна ипотека</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">📸 Фотогалерея</h2>
+    <div class="card">
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item" onclick="openLightbox(0)"><img src="https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 1" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(1)"><img src="https://10.img.avito.st/image/1/1.SHSCL7a45J20hiaYngo8c7KP5ps8jmaV9IvmnzKG7Jc0.f13TtorO-x2b7R3wZE2yP1VB0zwvPmImT0gLN2X2x8o?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 2" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(2)"><img src="https://10.img.avito.st/image/1/1.b0_chLa4w6bqLQGjjp0gSOwkwaBiJUGuqiDBpGwty6xq.zNdit7xoh3KuQjPqSvRac7PFihCW9Giec8SP7BsgcT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 3" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(3)"><img src="https://60.img.avito.st/image/1/1.csuW_ra43iKgVxwn_r8Fz6Ze3CQoX1wq4FrcICZX1igg.hpngh_r01FcSiSnW4bGC30Q-fZ6wZmjwCKROsG2Lgi0" alt="Фото 4" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(4)"><img src="https://60.img.avito.st/image/1/1.uJ8x5ra4FHYHT9ZzTeS3mgFGFnCPR5Z-R0IWdIFPHHyH.CGVCIOgOSZFicXvXh3xhoRP1iEVJj17yAje5hm2r0As" alt="Фото 5" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(5)"><img src="https://60.img.avito.st/image/1/1.MTffqLa4nd7pAV_bsZxrMu8In9hhCR_WqQyf3G8BldRp.boWKeJcnC4xLnfB7FQAwRw-EOTpkJh06NeTYMQVp4o0" alt="Фото 6" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(6)"><img src="https://60.img.avito.st/image/1/1.KQbfura4he_pE0fqgYZQAe8ah-lhGwfnqR6H7W8TjeVp.qhzQR1tPy6SUZyFBI2vp0pvSM9To56k4q9gShY01Bsk" alt="Фото 7" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(7)"><img src="https://60.img.avito.st/image/1/1.BXtbRba4qZJt7GuXXWEPfmvlq5Tl5CuaLeGrkOvsoZjt.MK1hSySO_UKuuPNarlf3njX8Ozr6mY1SCTZoWLHpLF8" alt="Фото 8" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(8)"><img src="https://40.img.avito.st/image/1/1.kRnfora4PfDpC__18eTpHe8CP_ZhA7_4qQY_8m8LNfpp.jyrdyTGtf8mLzry_20KF4Nna_Df6lRHGqWHiWaJDWro" alt="Фото 9" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(9)"><img src="https://00.img.avito.st/image/1/1.LOU567a4gAwPQkIJbbNW4QlLggqHSgIET0-CDolCiAaP.e4l-ZQLAiHk55eivsU07lSqdINwyGlApIWKtVh9LHFs?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 10" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(10)"><img src="https://70.img.avito.st/image/1/1.r0_c6ra4A6bqQ8GjjqzhSOxKAaBiS4Guqk4BpGxDC6xq.Wu_ZosWF77s5oDw-cwsM3PcuM9BtYWLc4xO2rXWBdt4" alt="Фото 11" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(11)"><img src="https://20.img.avito.st/image/1/1.EB86X7a4vPYM9n7zFkdoGAr_vvCE_j7-TPu-9Ir2tPyM.e8-ChhzNIxEt7q5SC5hy3LPuX_VTRx0CVT8vqgduaj8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 12" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(12)"><img src="https://60.img.avito.st/image/1/1.N8THB7a4my3xrlkopTNtwfenmSt5phklsaOZL3eukydx.Rvq-zrzRdUNEqa68UNJ3v7m0XhmCFlp19c-0z6IUrEo" alt="Фото 13" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(13)"><img src="https://00.img.avito.st/image/1/1.csm5_ra43iCPVxwl0f8Sz4le3CYHX1woz1rcIglX1ioP.hka5IpMhUN8-jJc1117pnuB4vtZs21u49eqmPVL788E?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 14" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(14)"><img src="https://70.img.avito.st/image/1/1.XKPmFLa48ErQvTJP0nUapta08kxYtXJCkLDySFa9-EBQ.PAdFpzblQeTHzTfydG8D50ew1nDovHwu6Ur02pq9grs" alt="Фото 15" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(15)"><img src="https://80.img.avito.st/image/1/1.t0_R8La4G6bnWdmjs4LNSOFQGaBvUZmup1QZpGFZE6xn.cKL6BGIUdpxDpEowWtU-y9HB27MIkuDhJghAX8UApkM" alt="Фото 16" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(16)"><img src="https://40.img.avito.st/image/1/1.Nv9Zcba4mhZv2FgTORl2-mnRmBDn0BgeL9WYFOnYkhzv.e6pEEukTZtHVxu-bdHyQNFwbHuMzH_v5sTkknD59Atk" alt="Фото 17" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(17)"><img src="https://10.img.avito.st/image/1/1.H4GVB7a4s2ijrnFtpxdQhqWnsW4rpjFg46OxaiWuu2Ij.7j0NxjK6YnKhQ4_TZGz4JXBC20acyv6PWBSeVGZCtxI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 18" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(18)"><img src="https://10.img.avito.st/image/1/1.YrgLg7a4zlE9KgxUQ7osvDsjzFe1IkxZfSfMU7sqxlu9.bl1Q7Xcv4cnohrUNdaTu_nohj2UGWByo4KeqCZmQ9YI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 19" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(19)"><img src="https://50.img.avito.st/image/1/1.xukwcba4agAG2KgFMD617QDRaAaO0OgIRtVoAoDYYgqG.m2AHMH6AJOEFut1-6HJqsCVe_mog_sv35EwGAapJOys" alt="Фото 20" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(20)"><img src="https://10.img.avito.st/image/1/1.eJ8wCLa41HYGoRZzTGlKmgCo1nCOqVZ-RqzWdICh3HyG.2pK_AkqXgoU564-H-2B88JLaYjQJJ03J0HeE9mKl8w0?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 21" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(21)"><img src="https://70.img.avito.st/image/1/1.r0-zPra4A6aFl8Gj4VDeS4OeAaANn4GuxZoBpAOXC6wF.aprlChWEXCMlBAlfFdq1qiZLpqJej_Abc6yFIVcfiPo" alt="Фото 22" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(22)"><img src="https://20.img.avito.st/image/1/1.mGsil7a4NIIUPvaHHoHtbxI3NoScNraKVDM2gJI-PIiU.VIDK9h5hSDlVlQNfX7ziGp6XWgtmiUOBsyqgh_6zD7A?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 23" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(23)"><img src="https://50.img.avito.st/image/1/1.Fs9kt7a4uiZSHngjRPNQylQXuCDaFjguEhO4JNQesizS.hqeogzLT9G2WgGKu1rMR4FihZA2Td1zQ1pFvE9KmBYc" alt="Фото 24" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(24)"><img src="https://70.img.avito.st/image/1/1.hrFk57a4KlhSTuhdZNnDsVRHKF7aRqhQEkMoWtROIlLS.kYB5ElDYmjUrakQRcib02oGoCcnRm9QbT6Ocm2g3Wpw" alt="Фото 25" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(25)"><img src="https://20.img.avito.st/image/1/1.eYK8qLa41WuKARduwqU-h4wI120CCVdjygzXaQwB3WEK.QFIV8ECw5rFa6naCCCeKLx1awcrQfOFRzyIlyNod0yg?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 26" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(26)"><img src="https://00.img.avito.st/image/1/1.bjmiYba4wtCUyADV8jwvPJLBwNYcwEDY1MXA0hLIytoU.gzx1c7SfQxzag0njNM-OrcK7jD1irUweUNaP3rI_bBo?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 27" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(27)"><img src="https://30.img.avito.st/image/1/1.Uqt7gra4_kJNKzxHU-cVrksi_ETFI3xKDSb8QMsr9kjN.ZUJVCNJuqm_X-rBQOi7mtvWM_rMqIkTzUUx9TCZpH6c?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 28" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(28)"><img src="https://10.img.avito.st/image/1/1.NtnXcba4mjDh2Fg1tyFC3ufRmDZp0Bg4odWYMmfYkjph.PpGphSWSibXuj-vJi0grsQBh3EojIM9v5ebVK1yWv4Q?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 29" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(29)"><img src="https://50.img.avito.st/image/1/1.pGk967a4CIALQsqFebXGbw1LCoaDSoqIS08Kgo1CAIqL.I0U2jyvsL1zkbNhjVb5ouDgPnLNOTahikqKuRNEjULE" alt="Фото 30" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(30)"><img src="https://70.img.avito.st/image/1/1.W6_w-ba490bGUDVDyuQtqcBZ9UBOWHVOhl31REBQ_0xG.hF1r3Cy-E70uKipbQ_dlL7Rjib6JoJa3fpL9J0c7Jaw" alt="Фото 31" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(31)"><img src="https://10.img.avito.st/image/1/1.dKM6iLa42EoMIRpPXvULpQoo2kyEKVpCTCzaSIoh0ECM.QzirytKO8hZqi1l8NoZP4kNwA6fiLGtwNe6QzckTtK8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 32" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(32)"><img src="https://90.img.avito.st/image/1/1.o5JM47a4D3t6Ss1-BonalnxDDX3yQo1zOkcNefxKB3H6.PobrOb4bkcAtVPk5_X5fu2K7TadtdPHSqPYtOKunNfM" alt="Фото 33" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(33)"><img src="https://10.img.avito.st/image/1/1.OfJMSra4lRt641ceMkpB9Xzqlx3y6xcTOu6XGfzjnRH6.NwIhCllGC6np3Wx1AAY6XYKDoDYwKCPa5rIxp4FO0zU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 34" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(34)"><img src="https://30.img.avito.st/image/1/1.wk-bgra4bqatK6yjk933SqsibKAlI-yu7SZspCsrZqwt.FzjxJXRo5CYAziMLRV4hhOsLYJ2W-p3QKJsfNIEO8uU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 35" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(35)"><img src="https://30.img.avito.st/image/1/1.TsgKcba44iE82CAkGlQ0zjrR4Ce00GApfNXgI7rY6iu8.urLI5s13WDf8P023-xipsnSGn71QUdQPFeg8dyHsTF4?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 36" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(36)"><img src="https://60.img.avito.st/image/1/1.LORF67a4gA1zQkIIEc9U4HVLggv7SgIFM0-CD_VCiAfz.XdWGTgx99UF8pDVspT6kyunrlSGBy4nEJcRd1K5-BVc" alt="Фото 37" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(37)"><img src="https://70.img.avito.st/image/1/1.v6YSyba4E08kYNFKYIfxoSJpEUmsaJFHZG0RTaJgG0Wk.fL6FpkS5XXivVc_p34VFjgyM3p2ADxJywJLPQNbSyEA" alt="Фото 38" loading="lazy"></div>
+        <div class="gallery-item" onclick="openLightbox(38)"><img src="https://40.img.avito.st/image/1/1.SVlfsra45bBpGye1QfM1X28S57bhE2e4KRbnsu8b7brp.nP2aTWBO-pH8QqM_9Z5U4nCVxaA1p_ge04tGQA1jnSQ" alt="Фото 39" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">📝 Описание</h2>
+    <div class="card">
+      <div class="desc-text">
+        <p><strong>ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ!</strong></p>
+        <p>Продается жилой дом в черте города ул. Подгорная, общей площадью <strong>161,8 кв.м.</strong>, на земельном участке <strong>7 соток</strong>.</p>
+        <p>Дом выполнен по индивидуальному проекту, из качественных материалов.</p>
+        <p><strong>Преимущества дома:</strong></p>
+        <ul>
+          <li>Окна ПВХ</li>
+          <li>Установлены новые радиаторы отопления</li>
+          <li>Два кондиционера</li>
+          <li>Межкомнатные двери в едином стиле</li>
+          <li>Напольное покрытие: линолеум и плитка</li>
+          <li>Стены выровнены, оклеяны обоями</li>
+          <li>Отдельная котельная и хоз.постройка</li>
+          <li>Санузел раздельный облицован кафелем до потолка</li>
+        </ul>
+        <p><strong>Планировка 1 этаж:</strong></p>
+        <ul>
+          <li>Прихожая</li>
+          <li>Холл</li>
+          <li>Две просторные кухни</li>
+          <li>Совмещенный санузел</li>
+          <li>Три спальни</li>
+        </ul>
+        <p><strong>2 этаж:</strong></p>
+        <ul>
+          <li>Три спальни</li>
+        </ul>
+        <p><strong>Коммуникации:</strong></p>
+        <ul>
+          <li>Электричество</li>
+          <li>Септик</li>
+          <li>Газ (Котёл) — дом отапливается</li>
+          <li>Центральная вода</li>
+        </ul>
+        <p>Район социально развит, дороги асфальтированы, улицы освещаются. В шаговой доступности остановка и магазин.</p>
+        <p><strong>Отличный вариант для большой семьи! Торг.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">📋 Характеристики</h2>
+    <div class="card">
+      <div class="specs-grid">
+        <div class="spec-row"><span class="spec-label">Количество комнат</span><span class="spec-value">6 спален</span></div>
+        <div class="spec-row"><span class="spec-label">Площадь дома</span><span class="spec-value">161,8 м²</span></div>
+        <div class="spec-row"><span class="spec-label">Площадь участка</span><span class="spec-value">7,1 сот.</span></div>
+        <div class="spec-row"><span class="spec-label">Этажей в доме</span><span class="spec-value">2</span></div>
+        <div class="spec-row"><span class="spec-label">Категория земель</span><span class="spec-value">СНТ</span></div>
+        <div class="spec-row"><span class="spec-label">Материал стен</span><span class="spec-value">Кирпич</span></div>
+        <div class="spec-row"><span class="spec-label">Санузел</span><span class="spec-value">Раздельный</span></div>
+        <div class="spec-row"><span class="spec-label">Ремонт</span><span class="spec-value">Требует ремонта</span></div>
+        <div class="spec-row"><span class="spec-label">Электричество</span><span class="spec-value">Есть</span></div>
+        <div class="spec-row"><span class="spec-label">Отопление</span><span class="spec-value">Газ (Котёл)</span></div>
+        <div class="spec-row"><span class="spec-label">Водоснабжение</span><span class="spec-value">Центральная вода</span></div>
+        <div class="spec-row"><span class="spec-label">Газ</span><span class="spec-value">Есть</span></div>
+        <div class="spec-row"><span class="spec-label">Канализация</span><span class="spec-value">Септик</span></div>
+        <div class="spec-row"><span class="spec-label">Транспортная доступность</span><span class="spec-value">Асфальт, остановка рядом</span></div>
+        <div class="spec-row"><span class="spec-label">Окна</span><span class="spec-value">ПВХ</span></div>
+        <div class="spec-row"><span class="spec-label">Кондиционеры</span><span class="spec-value">2 шт.</span></div>
+        <div class="spec-row"><span class="spec-label">Хоз. постройки</span><span class="spec-value">Котельная, хоз.постройка</span></div>
+        <div class="spec-row"><span class="spec-label">Условия продажи</span><span class="spec-value">Торг, возможна ипотека</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">📞 Контакты</h2>
+    <div class="contact-section">
+      <div class="contact-name">📋 Малек — агент недвижимости</div>
+      <div class="contact-phone"><a href="tel:+79611889644">+7 961 188 96 44</a></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 Все права защищены<br>
+    Источник: Avito.ru | ID объявления: 7954258695 | Обновлено: июнь 2026
+  </footer>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-arrow lightbox-prev" onclick="prevImage()">‹</button>
+  <img class="lightbox-img" id="lightboxImg" alt="">
+  <button class="lightbox-arrow lightbox-next" onclick="nextImage()">›</button>
+</div>
+
+<script>
+const galleryImages = [
+  "https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://10.img.avito.st/image/1/1.SHSCL7a45J20hiaYngo8c7KP5ps8jmaV9IvmnzKG7Jc0.f13TtorO-x2b7R3wZE2yP1VB0zwvPmImT0gLN2X2x8o?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://10.img.avito.st/image/1/1.b0_chLa4w6bqLQGjjp0gSOwkwaBiJUGuqiDBpGwty6xq.zNdit7xoh3KuQjPqSvRac7PFihCW9Giec8SP7BsgcT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://60.img.avito.st/image/1/1.csuW_ra43iKgVxwn_r8Fz6Ze3CQoX1wq4FrcICZX1igg.hpngh_r01FcSiSnW4bGC30Q-fZ6wZmjwCKROsG2Lgi0",
+  "https://60.img.avito.st/image/1/1.uJ8x5ra4FHYHT9ZzTeS3mgFGFnCPR5Z-R0IWdIFPHHyH.CGVCIOgOSZFicXvXh3xhoRP1iEVJj17yAje5hm2r0As",
+  "https://60.img.avito.st/image/1/1.MTffqLa4nd7pAV_bsZxrMu8In9hhCR_WqQyf3G8BldRp.boWKeJcnC4xLnfB7FQAwRw-EOTpkJh06NeTYMQVp4o0",
+  "https://60.img.avito.st/image/1/1.KQbfura4he_pE0fqgYZQAe8ah-lhGwfnqR6H7W8TjeVp.qhzQR1tPy6SUZyFBI2vp0pvSM9To56k4q9gShY01Bsk",
+  "https://60.img.avito.st/image/1/1.BXtbRba4qZJt7GuXXWEPfmvlq5Tl5CuaLeGrkOvsoZjt.MK1hSySO_UKuuPNarlf3njX8Ozr6mY1SCTZoWLHpLF8",
+  "https://40.img.avito.st/image/1/1.kRnfora4PfDpC__18eTpHe8CP_ZhA7_4qQY_8m8LNfpp.jyrdyTGtf8mLzry_20KF4Nna_Df6lRHGqWHiWaJDWro",
+  "https://00.img.avito.st/image/1/1.LOU567a4gAwPQkIJbbNW4QlLggqHSgIET0-CDolCiAaP.e4l-ZQLAiHk55eivsU07lSqdINwyGlApIWKtVh9LHFs?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://70.img.avito.st/image/1/1.r0_c6ra4A6bqQ8GjjqzhSOxKAaBiS4Guqk4BpGxDC6xq.Wu_ZosWF77s5oDw-cwsM3PcuM9BtYWLc4xO2rXWBdt4",
+  "https://20.img.avito.st/image/1/1.EB86X7a4vPYM9n7zFkdoGAr_vvCE_j7-TPu-9Ir2tPyM.e8-ChhzNIxEt7q5SC5hy3LPuX_VTRx0CVT8vqgduaj8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://60.img.avito.st/image/1/1.N8THB7a4my3xrlkopTNtwfenmSt5phklsaOZL3eukydx.Rvq-zrzRdUNEqa68UNJ3v7m0XhmCFlp19c-0z6IUrEo",
+  "https://00.img.avito.st/image/1/1.csm5_ra43iCPVxwl0f8Sz4le3CYHX1woz1rcIglX1ioP.hka5IpMhUN8-jJc1117pnuB4vtZs21u49eqmPVL788E?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://70.img.avito.st/image/1/1.XKPmFLa48ErQvTJP0nUapta08kxYtXJCkLDySFa9-EBQ.PAdFpzblQeTHzTfydG8D50ew1nDovHwu6Ur02pq9grs",
+  "https://80.img.avito.st/image/1/1.t0_R8La4G6bnWdmjs4LNSOFQGaBvUZmup1QZpGFZE6xn.cKL6BGIUdpxDpEowWtU-y9HB27MIkuDhJghAX8UApkM",
+  "https://40.img.avito.st/image/1/1.Nv9Zcba4mhZv2FgTORl2-mnRmBDn0BgeL9WYFOnYkhzv.e6pEEukTZtHVxu-bdHyQNFwbHuMzH_v5sTkknD59Atk",
+  "https://10.img.avito.st/image/1/1.H4GVB7a4s2ijrnFtpxdQhqWnsW4rpjFg46OxaiWuu2Ij.7j0NxjK6YnKhQ4_TZGz4JXBC20acyv6PWBSeVGZCtxI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://10.img.avito.st/image/1/1.YrgLg7a4zlE9KgxUQ7osvDsjzFe1IkxZfSfMU7sqxlu9.bl1Q7Xcv4cnohrUNdaTu_nohj2UGWByo4KeqCZmQ9YI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://50.img.avito.st/image/1/1.xukwcba4agAG2KgFMD617QDRaAaO0OgIRtVoAoDYYgqG.m2AHMH6AJOEFut1-6HJqsCVe_mog_sv35EwGAapJOys",
+  "https://10.img.avito.st/image/1/1.eJ8wCLa41HYGoRZzTGlKmgCo1nCOqVZ-RqzWdICh3HyG.2pK_AkqXgoU564-H-2B88JLaYjQJJ03J0HeE9mKl8w0?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://70.img.avito.st/image/1/1.r0-zPra4A6aFl8Gj4VDeS4OeAaANn4GuxZoBpAOXC6wF.aprlChWEXCMlBAlfFdq1qiZLpqJej_Abc6yFIVcfiPo",
+  "https://20.img.avito.st/image/1/1.mGsil7a4NIIUPvaHHoHtbxI3NoScNraKVDM2gJI-PIiU.VIDK9h5hSDlVlQNfX7ziGp6XWgtmiUOBsyqgh_6zD7A?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://50.img.avito.st/image/1/1.Fs9kt7a4uiZSHngjRPNQylQXuCDaFjguEhO4JNQesizS.hqeogzLT9G2WgGKu1rMR4FihZA2Td1zQ1pFvE9KmBYc",
+  "https://70.img.avito.st/image/1/1.hrFk57a4KlhSTuhdZNnDsVRHKF7aRqhQEkMoWtROIlLS.kYB5ElDYmjUrakQRcib02oGoCcnRm9QbT6Ocm2g3Wpw",
+  "https://20.img.avito.st/image/1/1.eYK8qLa41WuKARduwqU-h4wI120CCVdjygzXaQwB3WEK.QFIV8ECw5rFa6naCCCeKLx1awcrQfOFRzyIlyNod0yg?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://00.img.avito.st/image/1/1.bjmiYba4wtCUyADV8jwvPJLBwNYcwEDY1MXA0hLIytoU.gzx1c7SfQxzag0njNM-OrcK7jD1irUweUNaP3rI_bBo?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://30.img.avito.st/image/1/1.Uqt7gra4_kJNKzxHU-cVrksi_ETFI3xKDSb8QMsr9kjN.ZUJVCNJuqm_X-rBQOi7mtvWM_rMqIkTzUUx9TCZpH6c?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://10.img.avito.st/image/1/1.NtnXcba4mjDh2Fg1tyFC3ufRmDZp0Bg4odWYMmfYkjph.PpGphSWSibXuj-vJi0grsQBh3EojIM9v5ebVK1yWv4Q?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://50.img.avito.st/image/1/1.pGk967a4CIALQsqFebXGbw1LCoaDSoqIS08Kgo1CAIqL.I0U2jyvsL1zkbNhjVb5ouDgPnLNOTahikqKuRNEjULE",
+  "https://70.img.avito.st/image/1/1.W6_w-ba490bGUDVDyuQtqcBZ9UBOWHVOhl31REBQ_0xG.hF1r3Cy-E70uKipbQ_dlL7Rjib6JoJa3fpL9J0c7Jaw",
+  "https://10.img.avito.st/image/1/1.dKM6iLa42EoMIRpPXvULpQoo2kyEKVpCTCzaSIoh0ECM.QzirytKO8hZqi1l8NoZP4kNwA6fiLGtwNe6QzckTtK8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://90.img.avito.st/image/1/1.o5JM47a4D3t6Ss1-BonalnxDDX3yQo1zOkcNefxKB3H6.PobrOb4bkcAtVPk5_X5fu2K7TadtdPHSqPYtOKunNfM",
+  "https://10.img.avito.st/image/1/1.OfJMSra4lRt641ceMkpB9Xzqlx3y6xcTOu6XGfzjnRH6.NwIhCllGC6np3Wx1AAY6XYKDoDYwKCPa5rIxp4FO0zU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://30.img.avito.st/image/1/1.wk-bgra4bqatK6yjk933SqsibKAlI-yu7SZspCsrZqwt.FzjxJXRo5CYAziMLRV4hhOsLYJ2W-p3QKJsfNIEO8uU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://30.img.avito.st/image/1/1.TsgKcba44iE82CAkGlQ0zjrR4Ce00GApfNXgI7rY6iu8.urLI5s13WDf8P023-xipsnSGn71QUdQPFeg8dyHsTF4?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
+  "https://60.img.avito.st/image/1/1.LORF67a4gA1zQkIIEc9U4HVLggv7SgIFM0-CD_VCiAfz.XdWGTgx99UF8pDVspT6kyunrlSGBy4nEJcRd1K5-BVc",
+  "https://70.img.avito.st/image/1/1.v6YSyba4E08kYNFKYIfxoSJpEUmsaJFHZG0RTaJgG0Wk.fL6FpkS5XXivVc_p34VFjgyM3p2ADxJywJLPQNbSyEA",
+  "https://40.img.avito.st/image/1/1.SVlfsra45bBpGye1QfM1X28S57bhE2e4KRbnsu8b7brp.nP2aTWBO-pH8QqM_9Z5U4nCVxaA1p_ge04tGQA1jnSQ"
+];
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOutside(e) {
+  if (e.target === e.currentTarget) closeLightbox();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+}
+
+function nextImage() {
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
+}
+
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') prevImage();
+  if (e.key === 'ArrowRight') nextImage();
+});
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+(function() {
+  const saved = localStorage.getItem('theme');
+  const btn = document.getElementById('themeToggle');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙';
+  }
+})();
+</script>
+</body>
+</html>
