@@ -1,545 +1,1430 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Дом 161,8 м² на участке 7,1 сот. — Подгорная</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-:root {
-  --body-bg: #f8f9fa;
-  --card-bg: #fff;
-  --text-color: #222;
-  --header-bg: rgba(255,255,255,0.97);
-  --header-border: rgba(0,0,0,0.06);
-  --stat-card-bg: #f8f9fa;
-  --feature-bg: #f8f9fa;
-  --spec-odd: #fafafa;
-  --spec-border: #f0f0f0;
-  --price-color: #0b7e8c;
-  --stat-value-color: #222;
-  --section-title-color: #111;
-  --desc-text: #444;
-  --spec-label: #888;
-  --hero-counter-bg: rgba(0,0,0,0.6);
-  --hero-arrow-bg: rgba(255,255,255,0.85);
-  --hero-arrow-color: #333;
-  --hero-arrow-hover-bg: #fff;
-  --mortgage-pill-bg: #e6f4f6;
-  --mortgage-pill-text: #0b7e8c;
-  --contact-bg: #fff;
-  --map-placeholder-bg: #e9ecef;
-  --share-btn-bg: #f0f0f0;
-  --share-btn-hover-bg: #e0e0e0;
-  --lightbox-bg: rgba(0,0,0,0.92);
-  --lightbox-btn-color: #fff;
-}
-[data-theme="dark"] {
-  --body-bg: #121212;
-  --card-bg: #1e1e1e;
-  --text-color: #e0e0e0;
-  --header-bg: rgba(30,30,30,0.97);
-  --header-border: rgba(255,255,255,0.08);
-  --stat-card-bg: #2a2a2a;
-  --feature-bg: #2a2a2a;
-  --spec-odd: #2a2a2a;
-  --spec-border: #333;
-  --price-color: #20b2aa;
-  --stat-value-color: #e0e0e0;
-  --section-title-color: #eee;
-  --desc-text: #bbb;
-  --spec-label: #aaa;
-  --hero-counter-bg: rgba(0,0,0,0.8);
-  --hero-arrow-bg: rgba(50,50,50,0.9);
-  --hero-arrow-color: #eee;
-  --hero-arrow-hover-bg: #555;
-  --mortgage-pill-bg: #1a3a3a;
-  --mortgage-pill-text: #4dd0e1;
-  --contact-bg: #1e1e1e;
-  --map-placeholder-bg: #2a2a2a;
-  --share-btn-bg: #333;
-  --share-btn-hover-bg: #444;
-  --lightbox-bg: rgba(0,0,0,0.95);
-  --lightbox-btn-color: #ccc;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--body-bg);
-  color: var(--text-color);
-  line-height: 1.6;
-}
-.header {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--header-bg); border-bottom: 1px solid var(--header-border);
-  backdrop-filter: blur(12px); padding: 10px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.header-left { display: flex; align-items: center; gap: 12px; }
-.header-logo { font-size: 20px; }
-.header-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
-.header-subtitle { font-size: 12px; color: var(--spec-label); }
-.header-right { display: flex; align-items: center; gap: 8px; }
-#themeToggle {
-  background: none; border: none; font-size: 24px;
-  cursor: pointer; padding: 6px; border-radius: 50%;
-  transition: background 0.2s; line-height: 1;
-}
-#themeToggle:hover { background: var(--share-btn-bg); }
-.status-badge {
-  display: inline-block; background: #27ae60; color: #fff;
-  font-size: 11px; font-weight: 600; padding: 3px 10px;
-  border-radius: 20px; letter-spacing: 0.3px;
-}
-.container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-.hero {
-  margin-top: 60px; position: relative; width: 100%; height: 55vh;
-  min-height: 350px; overflow: hidden;
-}
-.hero img { width: 100%; height: 100%; object-fit: cover; }
-.hero-overlay {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.6));
-  padding: 30px 20px; text-align: center;
-}
-.hero-overlay span {
-  color: #fff; font-size: 16px; font-weight: 500;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  animation: bounce 2s infinite;
-}
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-.section { padding: 40px 0; }
-.section-title {
-  font-size: 28px; font-weight: 700; color: var(--section-title-color);
-  margin-bottom: 24px; padding-bottom: 10px;
-  border-bottom: 3px solid #0174FC; display: inline-block;
-}
-.card { background: var(--card-bg); border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 32px; margin-bottom: 20px; }
-.price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; margin-bottom: 28px; }
-.price { font-size: 42px; font-weight: 800; color: var(--price-color); }
-.price-label { font-size: 16px; color: var(--spec-label); font-weight: 400; }
-.price-per-meter { font-size: 20px; font-weight: 600; color: var(--text-color); }
-.mortgage-pill {
-  display: inline-block; background: var(--mortgage-pill-bg); color: var(--mortgage-pill-text);
-  font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 24px;
-}
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-.stat-card {
-  background: var(--stat-card-bg); border-radius: 14px; padding: 18px 16px;
-  text-align: center; transition: transform 0.2s;
-}
-.stat-card:hover { transform: translateY(-2px); }
-.stat-icon {
-  width: 44px; height: 44px; border-radius: 50%; display: flex;
-  align-items: center; justify-content: center; font-size: 20px; margin: 0 auto 10px;
-}
-.stat-icon.blue { background: #e3f0ff; } .stat-icon.green { background: #e3f9e5; }
-.stat-icon.orange { background: #fff3e0; } .stat-icon.pink { background: #fce4ec; }
-.stat-icon.purple { background: #f3e5f5; } .stat-icon.cyan { background: #e0f7fa; }
-.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--spec-label); margin-bottom: 4px; }
-.stat-value { font-size: 20px; font-weight: 700; color: var(--stat-value-color); }
-.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.feature-item {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--feature-bg); padding: 12px 16px; border-radius: 12px;
-  font-size: 14px; color: var(--text-color);
-}
-.feature-check { color: #27ae60; font-weight: 700; font-size: 18px; }
-.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.gallery-item {
-  aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; cursor: pointer;
-  transition: transform 0.3s; position: relative;
-}
-.gallery-item:hover { transform: scale(1.03); }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-.desc-text { font-size: 16px; line-height: 1.8; color: var(--desc-text); }
-.desc-text p { margin-bottom: 12px; }
-.desc-text ul { list-style: none; padding: 0; margin-bottom: 12px; }
-.desc-text ul li { padding: 4px 0 4px 20px; position: relative; }
-.desc-text ul li::before { content: "•"; position: absolute; left: 0; color: #0174FC; font-weight: 700; }
-.specs-grid { display: grid; grid-template-columns: 1fr 1fr; }
-.spec-row {
-  display: flex; justify-content: space-between; padding: 10px 16px;
-  border-bottom: 1px solid var(--spec-border);
-}
-.spec-row:nth-child(odd) { background: var(--spec-odd); }
-.spec-label { color: var(--spec-label); font-size: 14px; }
-.spec-value { font-weight: 600; color: var(--text-color); font-size: 14px; }
-.contact-section { text-align: center; padding: 32px; background: var(--contact-bg); border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
-.contact-name { font-size: 20px; font-weight: 700; color: var(--text-color); margin-bottom: 8px; }
-.contact-phone { font-size: 24px; font-weight: 700; color: #0174FC; }
-.contact-phone a { color: #0174FC; text-decoration: none; }
-.contact-phone a:hover { text-decoration: underline; }
-.footer { text-align: center; padding: 32px 16px; color: var(--spec-label); font-size: 13px; line-height: 1.8; }
-.lightbox {
-  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--lightbox-bg); z-index: 1000;
-  justify-content: center; align-items: center;
-}
-.lightbox.open { display: flex; }
-.lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
-.lightbox-close {
-  position: absolute; top: 20px; right: 28px; font-size: 36px;
-  color: var(--lightbox-btn-color); cursor: pointer; background: none; border: none;
-  z-index: 1001;
-}
-.lightbox-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  font-size: 48px; color: var(--lightbox-btn-color); cursor: pointer;
-  background: none; border: none; padding: 12px 16px; z-index: 1001;
-  transition: opacity 0.2s; opacity: 0.7;
-}
-.lightbox-arrow:hover { opacity: 1; }
-.lightbox-prev { left: 16px; }
-.lightbox-next { right: 16px; }
-@media (max-width: 768px) {
-  .header { padding: 8px 12px; }
-  .header-subtitle { display: none; }
-  .hero { height: 40vh; min-height: 280px; }
-  .section { padding: 24px 0; }
-  .card { padding: 20px; }
-  .price { font-size: 32px; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .features-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .specs-grid { grid-template-columns: 1fr; }
-  .section-title { font-size: 22px; }
-}
-@media (max-width: 480px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .price-row { gap: 8px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>План · Риелтор</title>
+    <style>
+        /* ──────────────────────────────────────────
+           Realtor Day Planner · dark design
+           ────────────────────────────────────────── */
+        :root {
+            --bg-canvas: #111113;
+            --bg-surface: #1a1a1e;
+            --bg-raised: #232327;
+            --bg-sidebar: #17171b;
+            --text-title:  #f0f0f0;
+            --text-body:   #d4d4d4;
+            --text-muted:  #8a8a8a;
+            --text-dim:    #5e5e66;
+            --accent:      #7c5cfc;
+            --accent-dim:  rgba(124, 92, 252, 0.10);
+            --accent-glow: rgba(124, 92, 252, 0.20);
+            --border:      #2c2c32;
+            --border-focus:#4a4a54;
+            --green:       #34d399;
+            --green-dim:   rgba(52, 211, 153, 0.12);
+            --amber:       #fbbf24;
+            --amber-dim:   rgba(251, 191, 36, 0.12);
+            --red:         #f87171;
+            --red-dim:     rgba(248, 113, 113, 0.12);
+            --font:        'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-ui:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 14px;
+            --space-lg: 20px;
+            --space-xl: 28px;
+            --radius:    10px;
+            --radius-sm: 6px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-canvas);
+            color: var(--text-body);
+            font-family: var(--font);
+            line-height: 1.55;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-canvas); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-focus); }
+
+        /* ── Layout: sidebar + main ───────────── */
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-lg);
+            display: flex;
+            gap: var(--space-lg);
+            min-height: 100vh;
+        }
+
+        /* ── Sidebar ──────────────────────────── */
+        #sidebar {
+            width: 200px;
+            min-width: 200px;
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        #sidebar h2 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            padding: var(--space-xs) var(--space-sm);
+            margin-bottom: var(--space-xs);
+            border-bottom: 1px solid var(--border);
+        }
+        .task-type-item {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-title);
+            border: 1px solid transparent;
+            transition: all 0.12s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .task-type-item:hover {
+            border-color: var(--border-focus);
+            background: rgba(255,255,255,0.02);
+        }
+        .task-type-item:active {
+            cursor: grabbing;
+            transform: scale(0.97);
+        }
+        .task-type-item .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── Main area ────────────────────────── */
+        #main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            min-width: 0;
+        }
+
+        /* ── Header ───────────────────────────── */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text-title);
+        }
+        #clock {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 6px 18px;
+            border-radius: 20px;
+            letter-spacing: 0.02em;
+            border: 1px solid transparent;
+        }
+
+        /* ── Objective ────────────────────────── */
+        #objective-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        #objective-box label {
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        #objective-input {
+            flex: 1;
+            min-width: 200px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-title);
+            font-family: var(--font);
+            font-size: 1rem;
+            padding: 4px 0;
+            caret-color: var(--accent);
+        }
+        #objective-input::placeholder { color: var(--text-dim); }
+
+        /* ── Config Bar ───────────────────────── */
+        #config-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-sm) var(--space-md);
+            font-size: 0.85rem;
+        }
+        #config-bar label {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        #config-bar select,
+        #config-bar input[type="number"] {
+            background: var(--bg-raised);
+            color: var(--text-title);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 6px 12px;
+            font-family: var(--font-ui);
+            font-size: 0.82rem;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+        #config-bar select:focus,
+        #config-bar input[type="number"]:focus { border-color: var(--accent); }
+        #config-bar input[type="number"] { width: 50px; text-align: center; }
+        #config-bar input[type="number"]::-webkit-outer-spin-button,
+        #config-bar input[type="number"]::-webkit-inner-spin-button { opacity: 1; height: 28px; }
+        #config-bar .sep { color: var(--border); }
+        #config-bar .block-count {
+            margin-left: auto;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+        }
+        #config-bar .block-count span { color: var(--accent); font-weight: 600; }
+
+        /* ── Grid ─────────────────────────────── */
+        #workspace {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        #schedule-grid {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .row {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.1s;
+            min-height: 52px;
+        }
+        .row:last-child { border-bottom: none; }
+        .row:hover { background: rgba(255, 255, 255, 0.02); }
+        .row.focused {
+            background: var(--accent-dim);
+            border-left: 3px solid var(--accent);
+            z-index: 1;
+        }
+        .row.selected {
+            background: var(--accent-dim);
+            border-left: 3px solid var(--accent);
+            z-index: 1;
+        }
+        .row.focused.selected { background: var(--accent-glow); }
+        .row.now {
+            box-shadow: inset 0 0 0 1px var(--accent);
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .row.merged { min-height: 50px; }
+
+        .time-col {
+            width: 130px;
+            min-width: 130px;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            border-right: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.15);
+            gap: 6px;
+        }
+        .time-col .badge {
+            font-size: 0.6rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: var(--accent-dim);
+            padding: 1px 8px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+        .drag-handle {
+            cursor: grab;
+            opacity: 0.45;
+            font-size: 1rem;
+            line-height: 1;
+            user-select: none;
+            padding: 0 2px;
+            transition: opacity 0.12s;
+        }
+        .drag-handle:active { cursor: grabbing; opacity: 0.8; }
+        .row:hover .drag-handle { opacity: 0.8; }
+
+        /* ── Task Cell ────────────────────────── */
+        .task-col {
+            flex: 1;
+            padding: 8px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
+            position: relative;
+        }
+        .task-type-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+        }
+        .task-desc {
+            font-size: 0.85rem;
+            color: var(--text-title);
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .task-desc.empty {
+            color: var(--text-dim);
+            font-style: italic;
+            font-size: 0.78rem;
+        }
+        .task-desc.done {
+            color: var(--text-dim);
+            text-decoration: line-through;
+            text-decoration-color: rgba(255,255,255,0.2);
+        }
+        .task-desc.blocked { color: #d4b44a; }
+        .metric-line {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .row.has-tasktype {
+            border-left: 3px solid transparent;
+        }
+
+        /* ── Type colors ──────────────────────── */
+        .type-0 { --type-color: #e74c3c; }   /* Встречи */
+        .type-1 { --type-color: #3498db; }   /* Показы */
+        .type-2 { --type-color: #2ecc71; }   /* Подборы */
+        .type-3 { --type-color: #f39c12; }   /* Перезвоны */
+        .type-4 { --type-color: #9b59b6; }   /* Соцсети */
+        .type-5 { --type-color: #e67e22; }   /* Расклейка */
+        .type-6 { --type-color: #1abc9c; }   /* Навыки продаж */
+        .type-7 { --type-color: #e91e63; }   /* Звонки */
+        .type-8 { --type-color: #f1c40f; }   /* Задатки/сделки */
+
+        .row.type-0 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(231, 76, 60, 0.07);
+        }
+        .row.type-1 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(52, 152, 219, 0.07);
+        }
+        .row.type-2 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(46, 204, 113, 0.07);
+        }
+        .row.type-3 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(243, 156, 18, 0.07);
+        }
+        .row.type-4 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(155, 89, 182, 0.07);
+        }
+        .row.type-5 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(230, 126, 34, 0.07);
+        }
+        .row.type-6 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(26, 188, 156, 0.07);
+        }
+        .row.type-7 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(233, 30, 99, 0.07);
+        }
+        .row.type-8 {
+            border-left: 3px solid var(--type-color);
+            background: rgba(241, 196, 15, 0.07);
+        }
+
+        .type-label-0 { color: #e74c3c; }
+        .type-label-1 { color: #3498db; }
+        .type-label-2 { color: #2ecc71; }
+        .type-label-3 { color: #f39c12; }
+        .type-label-4 { color: #9b59b6; }
+        .type-label-5 { color: #e67e22; }
+        .type-label-6 { color: #1abc9c; }
+        .type-label-7 { color: #e91e63; }
+        .type-label-8 { color: #f1c40f; }
+
+        /* Status dot in task cell */
+        .status-dot {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.7rem;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.1s;
+            position: absolute;
+            top: 8px;
+            right: 10px;
+        }
+        .status-dot.s-pending {
+            color: var(--text-dim);
+            border-color: var(--border-focus);
+            background: transparent;
+        }
+        .status-dot.s-done {
+            color: var(--green);
+            border-color: var(--green);
+            background: var(--green-dim);
+        }
+        .status-dot.s-blocked {
+            color: var(--amber);
+            border-color: var(--amber);
+            background: var(--amber-dim);
+        }
+
+        /* ── Merge Toolbar ────────────────────── */
+        #merge-bar {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-raised);
+            border: 1px solid var(--border-focus);
+            border-radius: 14px;
+            padding: 12px 22px;
+            display: none;
+            align-items: center;
+            gap: 14px;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            font-size: 0.85rem;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        #merge-bar.visible { display: flex; }
+        #merge-bar .count-label { color: var(--text-muted); }
+        #merge-bar .count-label strong { color: var(--accent); }
+        #merge-bar button {
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: all 0.12s;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .btn-primary:hover { box-shadow: 0 0 18px var(--accent-glow); }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border-color: var(--border);
+        }
+        .btn-ghost:hover { color: var(--text-title); border-color: var(--text-muted); }
+
+        /* ── Modal ────────────────────────────── */
+        #modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        #modal-overlay.open { display: flex; }
+        #modal {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            width: 92%;
+            max-width: 520px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        #modal h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--accent);
+            margin: 0;
+        }
+        #modal .range { font-size: 0.85rem; color: var(--text-muted); }
+        #modal label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        #modal input[type="text"],
+        #modal select {
+            width: 100%;
+            background: var(--bg-surface);
+            color: var(--text-title);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-family: var(--font-ui);
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        #modal input[type="text"]:focus,
+        #modal select:focus { border-color: var(--accent); }
+        #modal .actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            margin-top: var(--space-sm);
+        }
+        #modal .actions button {
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: all 0.12s;
+        }
+        .btn-save {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-save:hover { box-shadow: 0 0 16px var(--accent-glow); }
+        .btn-split {
+            background: transparent;
+            color: var(--amber);
+            border-color: rgba(251, 191, 36, 0.5);
+        }
+        .btn-split:hover { background: var(--amber-dim); border-color: var(--amber); }
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-muted);
+            border-color: var(--border);
+        }
+        .btn-cancel:hover { color: var(--text-title); border-color: var(--text-muted); }
+        .btn-delete {
+            background: transparent;
+            color: var(--red);
+            border-color: rgba(248, 113, 113, 0.4);
+            margin-right: auto;
+        }
+        .btn-delete:hover { background: var(--red-dim); border-color: var(--red); }
+
+        /* ── Keyboard Hints ───────────────────── */
+        #kbd-hint {
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            padding: 2px 0;
+        }
+        #kbd-hint kbd {
+            background: var(--bg-raised);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 8px;
+            font-family: var(--font-ui);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Dragging overlay ─────────────────── */
+        #drag-overlay {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            padding: 6px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            opacity: 0.9;
+            display: none;
+            white-space: nowrap;
+        }
+
+        /* ── Drop indicator ───────────────────── */
+        .row.drop-target {
+            outline: 2px dashed var(--accent);
+            outline-offset: -2px;
+        }
+        .row.drop-target-source {
+            outline: 2px dashed var(--amber);
+            outline-offset: -2px;
+        }
+
+        /* ── Responsive ───────────────────────── */
+        @media (max-width: 800px) {
+            #app {
+                flex-direction: column;
+                padding: var(--space-md);
+            }
+            #sidebar {
+                width: 100%;
+                min-width: 100%;
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: var(--space-sm);
+                gap: 4px;
+            }
+            #sidebar h2 {
+                width: 100%;
+                margin-bottom: 0;
+            }
+            .task-type-item {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+            .time-col { width: 100px; min-width: 100px; font-size: 0.7rem; padding: 6px 8px; }
+            .task-col { padding: 6px 10px; }
+            .task-type-label { font-size: 0.65rem; }
+            .task-desc { font-size: 0.78rem; }
+            #schedule-grid { max-height: 50vh; }
+            #modal { padding: var(--space-lg); }
+            #merge-bar { bottom: 16px; padding: 10px 16px; gap: 8px; font-size: 0.75rem; }
+        }
+    </style>
 </head>
 <body>
+    <!-- ── Drag Overlay ── -->
+    <div id="drag-overlay"></div>
 
-<header class="header">
-  <div class="header-left">
-    <span class="header-logo">🏠</span>
-    <span class="status-badge">Продажа</span>
-    <div>
-      <div class="header-title">Дом 161,8 м² · 7,1 сот.</div>
-      <div class="header-subtitle">Подгорная ул., Старый Оскол</div>
-    </div>
-  </div>
-  <div class="header-right">
-    <button id="themeToggle" onclick="toggleTheme()">🌙</button>
-  </div>
-</header>
+    <div id="app">
+        <!-- ═══ SIDEBAR ═══ -->
+        <aside id="sidebar">
+            <h2>Типы задач</h2>
+            <div id="task-type-list"></div>
+        </aside>
 
-<section class="hero">
-  <img src="https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Дом" loading="eager">
-  <div class="hero-overlay"><span>📸 Фотогалерея снизу ↓</span></div>
-</section>
+        <!-- ═══ MAIN ═══ -->
+        <div id="main">
+            <!-- ═══ HEADER ═══ -->
+            <header>
+                <h1>План · Риелтор</h1>
+                <div id="clock">00:00</div>
+            </header>
 
-<div class="container">
-  <section class="section">
-    <div class="card">
-      <div class="price-row">
-        <span class="price">6 290 000 ₽</span>
-        <span class="price-label">за объект</span>
-        <span class="price-per-meter">38 875 ₽/м²</span>
-        <span class="mortgage-pill">🏦 В ипотеку от 71 358 ₽/мес</span>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon blue">🛏️</div>
-          <div class="stat-label">Спальни</div>
-          <div class="stat-value">6</div>
+            <!-- ═══ OBJECTIVE ═══ -->
+            <section id="objective-box">
+                <label for="objective-input">✦ Цель дня</label>
+                <input type="text" id="objective-input" placeholder="Какая главная цель сегодня?">
+            </section>
+
+            <!-- ═══ CONFIG ═══ -->
+            <section id="config-bar">
+                <label for="interval-select">Интервал</label>
+                <select id="interval-select">
+                    <option value="5">5 мин</option>
+                    <option value="10">10 мин</option>
+                    <option value="15">15 мин</option>
+                    <option value="30">30 мин</option>
+                </select>
+                <label for="start-hour">С</label>
+                <input type="number" id="start-hour" value="6" min="0" max="23">
+                <span class="sep">:</span>
+                <span style="color:var(--text-dim);font-size:0.75rem;">00</span>
+                <label for="end-hour">До</label>
+                <input type="number" id="end-hour" value="22" min="0" max="23">
+                <span class="sep">:</span>
+                <span style="color:var(--text-dim);font-size:0.75rem;">00</span>
+                <span class="block-count">Блоков · <span id="block-count">192</span></span>
+            </section>
+
+            <!-- ═══ GRID ═══ -->
+            <main id="workspace">
+                <div id="schedule-grid">
+                    <!-- generated by JS -->
+                </div>
+            </main>
+
+            <!-- ═══ KEYBOARD HINTS ═══ -->
+            <div id="kbd-hint">
+                <kbd>↑↓</kbd> Навигация &nbsp;&nbsp;
+                <kbd>Enter</kbd> Редактировать &nbsp;&nbsp;
+                <kbd>O</kbd> Цель &nbsp;&nbsp;
+                <kbd>C</kbd> Настройки &nbsp;&nbsp;
+                <kbd>Esc</kbd> Сброс &nbsp;&nbsp;
+                Перетащи блоки чтобы объединить &nbsp;&nbsp;
+                <kbd>M</kbd> Слить &nbsp;&nbsp;
+                <kbd>↕</kbd> ручка ≡ – перенести блок
+            </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon green">📐</div>
-          <div class="stat-label">Площадь дома</div>
-          <div class="stat-value">161,8 м²</div>
+    </div>
+
+    <!-- ═══ MERGE TOOLBAR ═══ -->
+    <div id="merge-bar">
+        <span class="count-label"><strong id="merge-count">0</strong> выбрано</span>
+        <button class="btn-primary" id="btn-merge">Объединить</button>
+        <button class="btn-ghost" id="btn-merge-cancel">Отмена</button>
+    </div>
+
+    <!-- ═══ MODAL ═══ -->
+    <div id="modal-overlay">
+        <div id="modal">
+            <h3>✎ Редактировать блок</h3>
+            <div class="range" id="modal-range">08:00 – 08:05</div>
+
+            <label for="modal-tasktype">Тип задачи</label>
+            <select id="modal-tasktype">
+                <option value="-1">— Без типа —</option>
+                <option value="0">Встречи</option>
+                <option value="1">Показы</option>
+                <option value="2">Подборы</option>
+                <option value="3">Перезвоны</option>
+                <option value="4">Соцсети</option>
+                <option value="5">Расклейка</option>
+                <option value="6">Навыки продаж, переговоров</option>
+                <option value="7">Звонки</option>
+                <option value="8">Задатки/сделки</option>
+            </select>
+
+            <label for="modal-task">Задача</label>
+            <input type="text" id="modal-task" placeholder="Что нужно сделать?">
+
+            <label for="modal-metric">Успех / Результат</label>
+            <input type="text" id="modal-metric" placeholder="Измеримый результат">
+
+            <label for="modal-status">Статус</label>
+            <select id="modal-status">
+                <option value="pending">В работе</option>
+                <option value="completed">Выполнено</option>
+                <option value="blocked">Заблокировано</option>
+            </select>
+            <div class="actions">
+                <button class="btn-delete" id="btn-modal-delete">Очистить</button>
+                <button class="btn-split" id="btn-modal-split" style="display:none;">Разделить</button>
+                <button class="btn-cancel" id="btn-modal-cancel">Отмена</button>
+                <button class="btn-save" id="btn-modal-save">Сохранить</button>
+            </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon orange">🏡</div>
-          <div class="stat-label">Участок</div>
-          <div class="stat-value">7,1 сот.</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon pink">🏗️</div>
-          <div class="stat-label">Этажей</div>
-          <div class="stat-value">2</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon purple">🧱</div>
-          <div class="stat-label">Материал стен</div>
-          <div class="stat-value">Кирпич</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon cyan">🚿</div>
-          <div class="stat-label">Санузел</div>
-          <div class="stat-value">Раздельный</div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2 class="section-title">✅ Преимущества</h2>
-    <div class="features-grid">
-      <div class="feature-item"><span class="feature-check">✓</span> Кирпичный дом</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Окна ПВХ</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Новые радиаторы отопления</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Два кондиционера</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Межкомнатные двери в едином стиле</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Отдельная котельная и хоз.постройка</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Санузел облицован кафелем до потолка</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Кухонный гарнитур и газовая плита</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Газ, электричество, центральная вода</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Асфальтированная дорога</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Остановка рядом</div>
-      <div class="feature-item"><span class="feature-check">✓</span> Возможна ипотека</div>
-    </div>
-  </section>
+    <script>
+        (function() {
+            // ──────────────────────────────────────
+            // Realtor Day Planner
+            // ──────────────────────────────────────
 
-  <section class="section">
-    <h2 class="section-title">📸 Фотогалерея</h2>
-    <div class="card">
-      <div class="gallery-grid" id="galleryGrid">
-        <div class="gallery-item" onclick="openLightbox(0)"><img src="https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 1" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(1)"><img src="https://10.img.avito.st/image/1/1.SHSCL7a45J20hiaYngo8c7KP5ps8jmaV9IvmnzKG7Jc0.f13TtorO-x2b7R3wZE2yP1VB0zwvPmImT0gLN2X2x8o?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 2" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(2)"><img src="https://10.img.avito.st/image/1/1.b0_chLa4w6bqLQGjjp0gSOwkwaBiJUGuqiDBpGwty6xq.zNdit7xoh3KuQjPqSvRac7PFihCW9Giec8SP7BsgcT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 3" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(3)"><img src="https://60.img.avito.st/image/1/1.csuW_ra43iKgVxwn_r8Fz6Ze3CQoX1wq4FrcICZX1igg.hpngh_r01FcSiSnW4bGC30Q-fZ6wZmjwCKROsG2Lgi0" alt="Фото 4" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(4)"><img src="https://60.img.avito.st/image/1/1.uJ8x5ra4FHYHT9ZzTeS3mgFGFnCPR5Z-R0IWdIFPHHyH.CGVCIOgOSZFicXvXh3xhoRP1iEVJj17yAje5hm2r0As" alt="Фото 5" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(5)"><img src="https://60.img.avito.st/image/1/1.MTffqLa4nd7pAV_bsZxrMu8In9hhCR_WqQyf3G8BldRp.boWKeJcnC4xLnfB7FQAwRw-EOTpkJh06NeTYMQVp4o0" alt="Фото 6" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(6)"><img src="https://60.img.avito.st/image/1/1.KQbfura4he_pE0fqgYZQAe8ah-lhGwfnqR6H7W8TjeVp.qhzQR1tPy6SUZyFBI2vp0pvSM9To56k4q9gShY01Bsk" alt="Фото 7" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(7)"><img src="https://60.img.avito.st/image/1/1.BXtbRba4qZJt7GuXXWEPfmvlq5Tl5CuaLeGrkOvsoZjt.MK1hSySO_UKuuPNarlf3njX8Ozr6mY1SCTZoWLHpLF8" alt="Фото 8" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(8)"><img src="https://40.img.avito.st/image/1/1.kRnfora4PfDpC__18eTpHe8CP_ZhA7_4qQY_8m8LNfpp.jyrdyTGtf8mLzry_20KF4Nna_Df6lRHGqWHiWaJDWro" alt="Фото 9" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(9)"><img src="https://00.img.avito.st/image/1/1.LOU567a4gAwPQkIJbbNW4QlLggqHSgIET0-CDolCiAaP.e4l-ZQLAiHk55eivsU07lSqdINwyGlApIWKtVh9LHFs?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 10" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(10)"><img src="https://70.img.avito.st/image/1/1.r0_c6ra4A6bqQ8GjjqzhSOxKAaBiS4Guqk4BpGxDC6xq.Wu_ZosWF77s5oDw-cwsM3PcuM9BtYWLc4xO2rXWBdt4" alt="Фото 11" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(11)"><img src="https://20.img.avito.st/image/1/1.EB86X7a4vPYM9n7zFkdoGAr_vvCE_j7-TPu-9Ir2tPyM.e8-ChhzNIxEt7q5SC5hy3LPuX_VTRx0CVT8vqgduaj8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 12" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(12)"><img src="https://60.img.avito.st/image/1/1.N8THB7a4my3xrlkopTNtwfenmSt5phklsaOZL3eukydx.Rvq-zrzRdUNEqa68UNJ3v7m0XhmCFlp19c-0z6IUrEo" alt="Фото 13" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(13)"><img src="https://00.img.avito.st/image/1/1.csm5_ra43iCPVxwl0f8Sz4le3CYHX1woz1rcIglX1ioP.hka5IpMhUN8-jJc1117pnuB4vtZs21u49eqmPVL788E?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 14" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(14)"><img src="https://70.img.avito.st/image/1/1.XKPmFLa48ErQvTJP0nUapta08kxYtXJCkLDySFa9-EBQ.PAdFpzblQeTHzTfydG8D50ew1nDovHwu6Ur02pq9grs" alt="Фото 15" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(15)"><img src="https://80.img.avito.st/image/1/1.t0_R8La4G6bnWdmjs4LNSOFQGaBvUZmup1QZpGFZE6xn.cKL6BGIUdpxDpEowWtU-y9HB27MIkuDhJghAX8UApkM" alt="Фото 16" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(16)"><img src="https://40.img.avito.st/image/1/1.Nv9Zcba4mhZv2FgTORl2-mnRmBDn0BgeL9WYFOnYkhzv.e6pEEukTZtHVxu-bdHyQNFwbHuMzH_v5sTkknD59Atk" alt="Фото 17" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(17)"><img src="https://10.img.avito.st/image/1/1.H4GVB7a4s2ijrnFtpxdQhqWnsW4rpjFg46OxaiWuu2Ij.7j0NxjK6YnKhQ4_TZGz4JXBC20acyv6PWBSeVGZCtxI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 18" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(18)"><img src="https://10.img.avito.st/image/1/1.YrgLg7a4zlE9KgxUQ7osvDsjzFe1IkxZfSfMU7sqxlu9.bl1Q7Xcv4cnohrUNdaTu_nohj2UGWByo4KeqCZmQ9YI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 19" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(19)"><img src="https://50.img.avito.st/image/1/1.xukwcba4agAG2KgFMD617QDRaAaO0OgIRtVoAoDYYgqG.m2AHMH6AJOEFut1-6HJqsCVe_mog_sv35EwGAapJOys" alt="Фото 20" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(20)"><img src="https://10.img.avito.st/image/1/1.eJ8wCLa41HYGoRZzTGlKmgCo1nCOqVZ-RqzWdICh3HyG.2pK_AkqXgoU564-H-2B88JLaYjQJJ03J0HeE9mKl8w0?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 21" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(21)"><img src="https://70.img.avito.st/image/1/1.r0-zPra4A6aFl8Gj4VDeS4OeAaANn4GuxZoBpAOXC6wF.aprlChWEXCMlBAlfFdq1qiZLpqJej_Abc6yFIVcfiPo" alt="Фото 22" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(22)"><img src="https://20.img.avito.st/image/1/1.mGsil7a4NIIUPvaHHoHtbxI3NoScNraKVDM2gJI-PIiU.VIDK9h5hSDlVlQNfX7ziGp6XWgtmiUOBsyqgh_6zD7A?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 23" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(23)"><img src="https://50.img.avito.st/image/1/1.Fs9kt7a4uiZSHngjRPNQylQXuCDaFjguEhO4JNQesizS.hqeogzLT9G2WgGKu1rMR4FihZA2Td1zQ1pFvE9KmBYc" alt="Фото 24" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(24)"><img src="https://70.img.avito.st/image/1/1.hrFk57a4KlhSTuhdZNnDsVRHKF7aRqhQEkMoWtROIlLS.kYB5ElDYmjUrakQRcib02oGoCcnRm9QbT6Ocm2g3Wpw" alt="Фото 25" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(25)"><img src="https://20.img.avito.st/image/1/1.eYK8qLa41WuKARduwqU-h4wI120CCVdjygzXaQwB3WEK.QFIV8ECw5rFa6naCCCeKLx1awcrQfOFRzyIlyNod0yg?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 26" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(26)"><img src="https://00.img.avito.st/image/1/1.bjmiYba4wtCUyADV8jwvPJLBwNYcwEDY1MXA0hLIytoU.gzx1c7SfQxzag0njNM-OrcK7jD1irUweUNaP3rI_bBo?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 27" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(27)"><img src="https://30.img.avito.st/image/1/1.Uqt7gra4_kJNKzxHU-cVrksi_ETFI3xKDSb8QMsr9kjN.ZUJVCNJuqm_X-rBQOi7mtvWM_rMqIkTzUUx9TCZpH6c?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 28" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(28)"><img src="https://10.img.avito.st/image/1/1.NtnXcba4mjDh2Fg1tyFC3ufRmDZp0Bg4odWYMmfYkjph.PpGphSWSibXuj-vJi0grsQBh3EojIM9v5ebVK1yWv4Q?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 29" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(29)"><img src="https://50.img.avito.st/image/1/1.pGk967a4CIALQsqFebXGbw1LCoaDSoqIS08Kgo1CAIqL.I0U2jyvsL1zkbNhjVb5ouDgPnLNOTahikqKuRNEjULE" alt="Фото 30" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(30)"><img src="https://70.img.avito.st/image/1/1.W6_w-ba490bGUDVDyuQtqcBZ9UBOWHVOhl31REBQ_0xG.hF1r3Cy-E70uKipbQ_dlL7Rjib6JoJa3fpL9J0c7Jaw" alt="Фото 31" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(31)"><img src="https://10.img.avito.st/image/1/1.dKM6iLa42EoMIRpPXvULpQoo2kyEKVpCTCzaSIoh0ECM.QzirytKO8hZqi1l8NoZP4kNwA6fiLGtwNe6QzckTtK8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 32" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(32)"><img src="https://90.img.avito.st/image/1/1.o5JM47a4D3t6Ss1-BonalnxDDX3yQo1zOkcNefxKB3H6.PobrOb4bkcAtVPk5_X5fu2K7TadtdPHSqPYtOKunNfM" alt="Фото 33" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(33)"><img src="https://10.img.avito.st/image/1/1.OfJMSra4lRt641ceMkpB9Xzqlx3y6xcTOu6XGfzjnRH6.NwIhCllGC6np3Wx1AAY6XYKDoDYwKCPa5rIxp4FO0zU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 34" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(34)"><img src="https://30.img.avito.st/image/1/1.wk-bgra4bqatK6yjk933SqsibKAlI-yu7SZspCsrZqwt.FzjxJXRo5CYAziMLRV4hhOsLYJ2W-p3QKJsfNIEO8uU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 35" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(35)"><img src="https://30.img.avito.st/image/1/1.TsgKcba44iE82CAkGlQ0zjrR4Ce00GApfNXgI7rY6iu8.urLI5s13WDf8P023-xipsnSGn71QUdQPFeg8dyHsTF4?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ" alt="Фото 36" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(36)"><img src="https://60.img.avito.st/image/1/1.LORF67a4gA1zQkIIEc9U4HVLggv7SgIFM0-CD_VCiAfz.XdWGTgx99UF8pDVspT6kyunrlSGBy4nEJcRd1K5-BVc" alt="Фото 37" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(37)"><img src="https://70.img.avito.st/image/1/1.v6YSyba4E08kYNFKYIfxoSJpEUmsaJFHZG0RTaJgG0Wk.fL6FpkS5XXivVc_p34VFjgyM3p2ADxJywJLPQNbSyEA" alt="Фото 38" loading="lazy"></div>
-        <div class="gallery-item" onclick="openLightbox(38)"><img src="https://40.img.avito.st/image/1/1.SVlfsra45bBpGye1QfM1X28S57bhE2e4KRbnsu8b7brp.nP2aTWBO-pH8QqM_9Z5U4nCVxaA1p_ge04tGQA1jnSQ" alt="Фото 39" loading="lazy"></div>
-      </div>
-    </div>
-  </section>
+            const KEY = 'realtor-plan-v1';
 
-  <section class="section">
-    <h2 class="section-title">📝 Описание</h2>
-    <div class="card">
-      <div class="desc-text">
-        <p><strong>ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ!</strong></p>
-        <p>Продается жилой дом в черте города ул. Подгорная, общей площадью <strong>161,8 кв.м.</strong>, на земельном участке <strong>7 соток</strong>.</p>
-        <p>Дом выполнен по индивидуальному проекту, из качественных материалов.</p>
-        <p><strong>Преимущества дома:</strong></p>
-        <ul>
-          <li>Окна ПВХ</li>
-          <li>Установлены новые радиаторы отопления</li>
-          <li>Два кондиционера</li>
-          <li>Межкомнатные двери в едином стиле</li>
-          <li>Напольное покрытие: линолеум и плитка</li>
-          <li>Стены выровнены, оклеяны обоями</li>
-          <li>Отдельная котельная и хоз.постройка</li>
-          <li>Санузел раздельный облицован кафелем до потолка</li>
-        </ul>
-        <p><strong>Планировка 1 этаж:</strong></p>
-        <ul>
-          <li>Прихожая</li>
-          <li>Холл</li>
-          <li>Две просторные кухни</li>
-          <li>Совмещенный санузел</li>
-          <li>Три спальни</li>
-        </ul>
-        <p><strong>2 этаж:</strong></p>
-        <ul>
-          <li>Три спальни</li>
-        </ul>
-        <p><strong>Коммуникации:</strong></p>
-        <ul>
-          <li>Электричество</li>
-          <li>Септик</li>
-          <li>Газ (Котёл) — дом отапливается</li>
-          <li>Центральная вода</li>
-        </ul>
-        <p>Район социально развит, дороги асфальтированы, улицы освещаются. В шаговой доступности остановка и магазин.</p>
-        <p><strong>Отличный вариант для большой семьи! Торг.</strong></p>
-      </div>
-    </div>
-  </section>
+            // 9 task types (Russian)
+            const TASK_TYPES = [
+                { name: 'Встречи',                  color: '#e74c3c' },
+                { name: 'Показы',                    color: '#3498db' },
+                { name: 'Подборы',                   color: '#2ecc71' },
+                { name: 'Перезвоны',                 color: '#f39c12' },
+                { name: 'Соцсети',                   color: '#9b59b6' },
+                { name: 'Расклейка',                 color: '#e67e22' },
+                { name: 'Навыки продаж, переговоров', color: '#1abc9c' },
+                { name: 'Звонки',                    color: '#e91e63' },
+                { name: 'Задатки/сделки',             color: '#f1c40f' }
+            ];
 
-  <section class="section">
-    <h2 class="section-title">📋 Характеристики</h2>
-    <div class="card">
-      <div class="specs-grid">
-        <div class="spec-row"><span class="spec-label">Количество комнат</span><span class="spec-value">6 спален</span></div>
-        <div class="spec-row"><span class="spec-label">Площадь дома</span><span class="spec-value">161,8 м²</span></div>
-        <div class="spec-row"><span class="spec-label">Площадь участка</span><span class="spec-value">7,1 сот.</span></div>
-        <div class="spec-row"><span class="spec-label">Этажей в доме</span><span class="spec-value">2</span></div>
-        <div class="spec-row"><span class="spec-label">Категория земель</span><span class="spec-value">СНТ</span></div>
-        <div class="spec-row"><span class="spec-label">Материал стен</span><span class="spec-value">Кирпич</span></div>
-        <div class="spec-row"><span class="spec-label">Санузел</span><span class="spec-value">Раздельный</span></div>
-        <div class="spec-row"><span class="spec-label">Ремонт</span><span class="spec-value">Требует ремонта</span></div>
-        <div class="spec-row"><span class="spec-label">Электричество</span><span class="spec-value">Есть</span></div>
-        <div class="spec-row"><span class="spec-label">Отопление</span><span class="spec-value">Газ (Котёл)</span></div>
-        <div class="spec-row"><span class="spec-label">Водоснабжение</span><span class="spec-value">Центральная вода</span></div>
-        <div class="spec-row"><span class="spec-label">Газ</span><span class="spec-value">Есть</span></div>
-        <div class="spec-row"><span class="spec-label">Канализация</span><span class="spec-value">Септик</span></div>
-        <div class="spec-row"><span class="spec-label">Транспортная доступность</span><span class="spec-value">Асфальт, остановка рядом</span></div>
-        <div class="spec-row"><span class="spec-label">Окна</span><span class="spec-value">ПВХ</span></div>
-        <div class="spec-row"><span class="spec-label">Кондиционеры</span><span class="spec-value">2 шт.</span></div>
-        <div class="spec-row"><span class="spec-label">Хоз. постройки</span><span class="spec-value">Котельная, хоз.постройка</span></div>
-        <div class="spec-row"><span class="spec-label">Условия продажи</span><span class="spec-value">Торг, возможна ипотека</span></div>
-      </div>
-    </div>
-  </section>
+            const DEF = {
+                config: { interval: 5, start: 6, end: 22 },
+                date: new Date().toISOString().slice(0, 10),
+                objective: '',
+                blocks: {}
+            };
 
-  <section class="section">
-    <h2 class="section-title">📞 Контакты</h2>
-    <div class="contact-section">
-      <div class="contact-name">📋 Малек — агент недвижимости</div>
-      <div class="contact-phone"><a href="tel:+79611889644">+7 961 188 96 44</a></div>
-    </div>
-  </section>
+            // ── DOM refs ──────────────────────────
+            const $ = s => document.querySelector(s);
+            const $$ = s => document.querySelectorAll(s);
 
-  <footer class="footer">
-    © 2026 Все права защищены<br>
-    Источник: Avito.ru | ID объявления: 7954258695 | Обновлено: июнь 2026
-  </footer>
-</div>
+            const domClock = $('#clock');
+            const domObj = $('#objective-input');
+            const domInt = $('#interval-select');
+            const domStart = $('#start-hour');
+            const domEnd = $('#end-hour');
+            const domGrid = $('#schedule-grid');
+            const domCnt = $('#block-count');
+            const domBar = $('#merge-bar');
+            const domMCnt = $('#merge-count');
+            const domBMerge = $('#btn-merge');
+            const domBCancel = $('#btn-merge-cancel');
+            const domModalOverlay = $('#modal-overlay');
+            const domMRange = $('#modal-range');
+            const domMTaskType = $('#modal-tasktype');
+            const domMTask = $('#modal-task');
+            const domMMetric = $('#modal-metric');
+            const domMStatus = $('#modal-status');
+            const domMSave = $('#btn-modal-save');
+            const domMCancel = $('#btn-modal-cancel');
+            const domMDelete = $('#btn-modal-delete');
+            const domMSplit = $('#btn-modal-split');
+            const domTypeList = $('#task-type-list');
+            const domDragOverlay = $('#drag-overlay');
 
-<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-arrow lightbox-prev" onclick="prevImage()">‹</button>
-  <img class="lightbox-img" id="lightboxImg" alt="">
-  <button class="lightbox-arrow lightbox-next" onclick="nextImage()">›</button>
-</div>
+            // ── State ─────────────────────────────
+            let state = load();
+            let timeKeys = [];
+            let sel = new Set();
+            let focused = null;
+            let dragStart = null, dragEnd = null, dragging = false, mouseDown = null, mouseDownAt = 0;
+            let modalKey = null;
+            let dragSourceKey = null; // for block move via drag handle
 
-<script>
-const galleryImages = [
-  "https://10.img.avito.st/image/1/1.iNeCJra4JD60j-Y7njDI0rKGJjg8h6Y29IImPDKPLDQ0.QY93F484C1Jhp7ve46Z_sSocsndIbIHSmPpLoIiNatY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://10.img.avito.st/image/1/1.SHSCL7a45J20hiaYngo8c7KP5ps8jmaV9IvmnzKG7Jc0.f13TtorO-x2b7R3wZE2yP1VB0zwvPmImT0gLN2X2x8o?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://10.img.avito.st/image/1/1.b0_chLa4w6bqLQGjjp0gSOwkwaBiJUGuqiDBpGwty6xq.zNdit7xoh3KuQjPqSvRac7PFihCW9Giec8SP7BsgcT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://60.img.avito.st/image/1/1.csuW_ra43iKgVxwn_r8Fz6Ze3CQoX1wq4FrcICZX1igg.hpngh_r01FcSiSnW4bGC30Q-fZ6wZmjwCKROsG2Lgi0",
-  "https://60.img.avito.st/image/1/1.uJ8x5ra4FHYHT9ZzTeS3mgFGFnCPR5Z-R0IWdIFPHHyH.CGVCIOgOSZFicXvXh3xhoRP1iEVJj17yAje5hm2r0As",
-  "https://60.img.avito.st/image/1/1.MTffqLa4nd7pAV_bsZxrMu8In9hhCR_WqQyf3G8BldRp.boWKeJcnC4xLnfB7FQAwRw-EOTpkJh06NeTYMQVp4o0",
-  "https://60.img.avito.st/image/1/1.KQbfura4he_pE0fqgYZQAe8ah-lhGwfnqR6H7W8TjeVp.qhzQR1tPy6SUZyFBI2vp0pvSM9To56k4q9gShY01Bsk",
-  "https://60.img.avito.st/image/1/1.BXtbRba4qZJt7GuXXWEPfmvlq5Tl5CuaLeGrkOvsoZjt.MK1hSySO_UKuuPNarlf3njX8Ozr6mY1SCTZoWLHpLF8",
-  "https://40.img.avito.st/image/1/1.kRnfora4PfDpC__18eTpHe8CP_ZhA7_4qQY_8m8LNfpp.jyrdyTGtf8mLzry_20KF4Nna_Df6lRHGqWHiWaJDWro",
-  "https://00.img.avito.st/image/1/1.LOU567a4gAwPQkIJbbNW4QlLggqHSgIET0-CDolCiAaP.e4l-ZQLAiHk55eivsU07lSqdINwyGlApIWKtVh9LHFs?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://70.img.avito.st/image/1/1.r0_c6ra4A6bqQ8GjjqzhSOxKAaBiS4Guqk4BpGxDC6xq.Wu_ZosWF77s5oDw-cwsM3PcuM9BtYWLc4xO2rXWBdt4",
-  "https://20.img.avito.st/image/1/1.EB86X7a4vPYM9n7zFkdoGAr_vvCE_j7-TPu-9Ir2tPyM.e8-ChhzNIxEt7q5SC5hy3LPuX_VTRx0CVT8vqgduaj8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://60.img.avito.st/image/1/1.N8THB7a4my3xrlkopTNtwfenmSt5phklsaOZL3eukydx.Rvq-zrzRdUNEqa68UNJ3v7m0XhmCFlp19c-0z6IUrEo",
-  "https://00.img.avito.st/image/1/1.csm5_ra43iCPVxwl0f8Sz4le3CYHX1woz1rcIglX1ioP.hka5IpMhUN8-jJc1117pnuB4vtZs21u49eqmPVL788E?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://70.img.avito.st/image/1/1.XKPmFLa48ErQvTJP0nUapta08kxYtXJCkLDySFa9-EBQ.PAdFpzblQeTHzTfydG8D50ew1nDovHwu6Ur02pq9grs",
-  "https://80.img.avito.st/image/1/1.t0_R8La4G6bnWdmjs4LNSOFQGaBvUZmup1QZpGFZE6xn.cKL6BGIUdpxDpEowWtU-y9HB27MIkuDhJghAX8UApkM",
-  "https://40.img.avito.st/image/1/1.Nv9Zcba4mhZv2FgTORl2-mnRmBDn0BgeL9WYFOnYkhzv.e6pEEukTZtHVxu-bdHyQNFwbHuMzH_v5sTkknD59Atk",
-  "https://10.img.avito.st/image/1/1.H4GVB7a4s2ijrnFtpxdQhqWnsW4rpjFg46OxaiWuu2Ij.7j0NxjK6YnKhQ4_TZGz4JXBC20acyv6PWBSeVGZCtxI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://10.img.avito.st/image/1/1.YrgLg7a4zlE9KgxUQ7osvDsjzFe1IkxZfSfMU7sqxlu9.bl1Q7Xcv4cnohrUNdaTu_nohj2UGWByo4KeqCZmQ9YI?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://50.img.avito.st/image/1/1.xukwcba4agAG2KgFMD617QDRaAaO0OgIRtVoAoDYYgqG.m2AHMH6AJOEFut1-6HJqsCVe_mog_sv35EwGAapJOys",
-  "https://10.img.avito.st/image/1/1.eJ8wCLa41HYGoRZzTGlKmgCo1nCOqVZ-RqzWdICh3HyG.2pK_AkqXgoU564-H-2B88JLaYjQJJ03J0HeE9mKl8w0?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://70.img.avito.st/image/1/1.r0-zPra4A6aFl8Gj4VDeS4OeAaANn4GuxZoBpAOXC6wF.aprlChWEXCMlBAlfFdq1qiZLpqJej_Abc6yFIVcfiPo",
-  "https://20.img.avito.st/image/1/1.mGsil7a4NIIUPvaHHoHtbxI3NoScNraKVDM2gJI-PIiU.VIDK9h5hSDlVlQNfX7ziGp6XWgtmiUOBsyqgh_6zD7A?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://50.img.avito.st/image/1/1.Fs9kt7a4uiZSHngjRPNQylQXuCDaFjguEhO4JNQesizS.hqeogzLT9G2WgGKu1rMR4FihZA2Td1zQ1pFvE9KmBYc",
-  "https://70.img.avito.st/image/1/1.hrFk57a4KlhSTuhdZNnDsVRHKF7aRqhQEkMoWtROIlLS.kYB5ElDYmjUrakQRcib02oGoCcnRm9QbT6Ocm2g3Wpw",
-  "https://20.img.avito.st/image/1/1.eYK8qLa41WuKARduwqU-h4wI120CCVdjygzXaQwB3WEK.QFIV8ECw5rFa6naCCCeKLx1awcrQfOFRzyIlyNod0yg?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://00.img.avito.st/image/1/1.bjmiYba4wtCUyADV8jwvPJLBwNYcwEDY1MXA0hLIytoU.gzx1c7SfQxzag0njNM-OrcK7jD1irUweUNaP3rI_bBo?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://30.img.avito.st/image/1/1.Uqt7gra4_kJNKzxHU-cVrksi_ETFI3xKDSb8QMsr9kjN.ZUJVCNJuqm_X-rBQOi7mtvWM_rMqIkTzUUx9TCZpH6c?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://10.img.avito.st/image/1/1.NtnXcba4mjDh2Fg1tyFC3ufRmDZp0Bg4odWYMmfYkjph.PpGphSWSibXuj-vJi0grsQBh3EojIM9v5ebVK1yWv4Q?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://50.img.avito.st/image/1/1.pGk967a4CIALQsqFebXGbw1LCoaDSoqIS08Kgo1CAIqL.I0U2jyvsL1zkbNhjVb5ouDgPnLNOTahikqKuRNEjULE",
-  "https://70.img.avito.st/image/1/1.W6_w-ba490bGUDVDyuQtqcBZ9UBOWHVOhl31REBQ_0xG.hF1r3Cy-E70uKipbQ_dlL7Rjib6JoJa3fpL9J0c7Jaw",
-  "https://10.img.avito.st/image/1/1.dKM6iLa42EoMIRpPXvULpQoo2kyEKVpCTCzaSIoh0ECM.QzirytKO8hZqi1l8NoZP4kNwA6fiLGtwNe6QzckTtK8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://90.img.avito.st/image/1/1.o5JM47a4D3t6Ss1-BonalnxDDX3yQo1zOkcNefxKB3H6.PobrOb4bkcAtVPk5_X5fu2K7TadtdPHSqPYtOKunNfM",
-  "https://10.img.avito.st/image/1/1.OfJMSra4lRt641ceMkpB9Xzqlx3y6xcTOu6XGfzjnRH6.NwIhCllGC6np3Wx1AAY6XYKDoDYwKCPa5rIxp4FO0zU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://30.img.avito.st/image/1/1.wk-bgra4bqatK6yjk933SqsibKAlI-yu7SZspCsrZqwt.FzjxJXRo5CYAziMLRV4hhOsLYJ2W-p3QKJsfNIEO8uU?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://30.img.avito.st/image/1/1.TsgKcba44iE82CAkGlQ0zjrR4Ce00GApfNXgI7rY6iu8.urLI5s13WDf8P023-xipsnSGn71QUdQPFeg8dyHsTF4?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ",
-  "https://60.img.avito.st/image/1/1.LORF67a4gA1zQkIIEc9U4HVLggv7SgIFM0-CD_VCiAfz.XdWGTgx99UF8pDVspT6kyunrlSGBy4nEJcRd1K5-BVc",
-  "https://70.img.avito.st/image/1/1.v6YSyba4E08kYNFKYIfxoSJpEUmsaJFHZG0RTaJgG0Wk.fL6FpkS5XXivVc_p34VFjgyM3p2ADxJywJLPQNbSyEA",
-  "https://40.img.avito.st/image/1/1.SVlfsra45bBpGye1QfM1X28S57bhE2e4KRbnsu8b7brp.nP2aTWBO-pH8QqM_9Z5U4nCVxaA1p_ge04tGQA1jnSQ"
-];
+            // ── Persistence ───────────────────────
+            function load() {
+                try {
+                    const raw = localStorage.getItem(KEY);
+                    if (raw) {
+                        const p = JSON.parse(raw);
+                        return { ...JSON.parse(JSON.stringify(DEF)), ...p,
+                            config: { ...DEF.config, ...(p.config || {}) }
+                        };
+                    }
+                } catch (_) {}
+                return JSON.parse(JSON.stringify(DEF));
+            }
 
-let currentIndex = 0;
+            function save() {
+                state.date = new Date().toISOString().slice(0, 10);
+                try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {}
+            }
 
-function openLightbox(index) {
-  currentIndex = index;
-  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+            // ── Time helpers ──────────────────────
+            function toMin(k) { const [h,m]=k.split(':').map(Number); return h*60+m; }
+            function toKey(m) {
+                const h = Math.floor(m/60)%24, mm = m%60;
+                return String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0');
+            }
+            function add(k, n) { return toKey(toMin(k) + n); }
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
+            function genKeys() {
+                const { interval, start, end } = state.config;
+                const keys = [];
+                for (let m = start*60; m < end*60; m += interval) keys.push(toKey(m));
+                return keys;
+            }
 
-function closeLightboxOutside(e) {
-  if (e.target === e.currentTarget) closeLightbox();
-}
+            function endKey(k, span) { return add(k, (span||1)*state.config.interval); }
+            function rangeStr(k, span) { return `${k} – ${endKey(k,span)}`; }
 
-function prevImage() {
-  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
-}
+            // ── Build visible ─────────────────────
+            function visible() {
+                const keys = timeKeys, out = [];
+                let skip = 0;
+                for (let i=0; i<keys.length; i++) {
+                    if (skip > 0) { skip--; continue; }
+                    const k = keys[i];
+                    const b = state.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span:1 };
+                    const span = Math.max(1, Math.min(b.span||1, keys.length-i));
+                    skip = span - 1;
+                    out.push({ k, task:b.task||'', metric:b.metric||'', status:b.status||'pending', type:b.type!==undefined?b.type:-1, span, range:rangeStr(k,span), merged:span>1 });
+                }
+                return out;
+            }
 
-function nextImage() {
-  currentIndex = (currentIndex + 1) % galleryImages.length;
-  document.getElementById('lightboxImg').src = galleryImages[currentIndex];
-}
+            // ── Now key ───────────────────────────
+            function nowKey() {
+                const d = new Date(), m = d.getHours()*60+d.getMinutes();
+                const { interval, start, end } = state.config;
+                const s=start*60, eM=end*60;
+                if (m < s || m >= eM) return null;
+                return toKey(s + Math.floor((m-s)/interval)*interval);
+            }
 
-document.addEventListener('keydown', function(e) {
-  const lb = document.getElementById('lightbox');
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') prevImage();
-  if (e.key === 'ArrowRight') nextImage();
-});
+            // ── Render sidebar ────────────────────
+            function renderSidebar() {
+                domTypeList.innerHTML = '';
+                TASK_TYPES.forEach((tt, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'task-type-item';
+                    item.draggable = true;
+                    item.dataset.typeIndex = i;
 
-function toggleTheme() {
-  const html = document.documentElement;
-  const btn = document.getElementById('themeToggle');
-  if (html.getAttribute('data-theme') === 'dark') {
-    html.setAttribute('data-theme', 'light');
-    btn.textContent = '🌙';
-    localStorage.setItem('theme', 'light');
-  } else {
-    html.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀️';
-    localStorage.setItem('theme', 'dark');
-  }
-}
+                    const dot = document.createElement('span');
+                    dot.className = 'color-dot';
+                    dot.style.background = tt.color;
 
-(function() {
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('themeToggle');
-  if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    btn.textContent = '☀️';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    btn.textContent = '🌙';
-  }
-})();
-</script>
+                    const label = document.createElement('span');
+                    label.textContent = tt.name;
+
+                    item.append(dot, label);
+
+                    item.addEventListener('dragstart', e => {
+                        e.dataTransfer.setData('text/plain', String(i));
+                        e.dataTransfer.effectAllowed = 'copy';
+                        domDragOverlay.textContent = tt.name;
+                        domDragOverlay.style.background = tt.color;
+                        domDragOverlay.style.display = 'block';
+                    });
+
+                    item.addEventListener('drag', e => {
+                        domDragOverlay.style.left = (e.clientX - 60) + 'px';
+                        domDragOverlay.style.top = (e.clientY - 20) + 'px';
+                    });
+
+                    item.addEventListener('dragend', () => {
+                        domDragOverlay.style.display = 'none';
+                        $$('#schedule-grid .row.drop-target').forEach(r => r.classList.remove('drop-target'));
+                    });
+
+                    domTypeList.appendChild(item);
+                });
+            }
+
+            // ── Render grid ───────────────────────
+            function render() {
+                timeKeys = genKeys();
+                const list = visible(), nk = nowKey();
+                const frag = document.createDocumentFragment();
+                list.forEach(v => {
+                    const row = document.createElement('div');
+                    row.className = 'row';
+                    if (v.merged) row.classList.add('merged');
+                    if (sel.has(v.k)) row.classList.add('selected');
+                    if (focused === v.k) row.classList.add('focused');
+                    if (v.k === nk) row.classList.add('now');
+                    if (v.type >= 0 && v.type < 9) {
+                        row.classList.add('type-' + v.type);
+                        row.classList.add('has-tasktype');
+                    }
+                    row.dataset.k = v.k;
+                    row.dataset.span = v.span;
+
+                    // Make rows droppable for sidebar types and block move
+                    row.addEventListener('dragover', e => {
+                        e.preventDefault();
+                        // Accept both sidebar type drop and block move
+                        if (e.dataTransfer.types.includes('text/plain') || e.dataTransfer.types.includes('application/x-realtor-key')) {
+                            e.dataTransfer.dropEffect = e.dataTransfer.types.includes('application/x-realtor-key') ? 'move' : 'copy';
+                            $$('#schedule-grid .row.drop-target').forEach(r => r.classList.remove('drop-target'));
+                            row.classList.add('drop-target');
+                        }
+                    });
+                    row.addEventListener('dragleave', () => {
+                        row.classList.remove('drop-target');
+                    });
+                    row.addEventListener('drop', e => {
+                        e.preventDefault();
+                        row.classList.remove('drop-target');
+                        // Check for block move first
+                        if (e.dataTransfer.types.includes('application/x-realtor-key')) {
+                            const sourceKey = e.dataTransfer.getData('application/x-realtor-key');
+                            if (sourceKey && sourceKey !== row.dataset.k) {
+                                moveBlock(sourceKey, row.dataset.k);
+                            }
+                            return;
+                        }
+                        // Otherwise sidebar type drop
+                        const typeIndex = parseInt(e.dataTransfer.getData('text/plain'), 10);
+                        if (isNaN(typeIndex) || typeIndex < 0 || typeIndex >= 9) return;
+                        const k = row.dataset.k;
+                        if (!k) return;
+                        const b = state.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span: parseInt(row.dataset.span) || 1 };
+                        b.type = typeIndex;
+                        if (!b.task) b.task = TASK_TYPES[typeIndex].name;
+                        state.blocks[k] = b;
+                        save();
+                        render();
+                        domDragOverlay.style.display = 'none';
+                    });
+
+                    const tc = document.createElement('div');
+                    tc.className = 'time-col';
+
+                    // Drag handle for moving existing blocks
+                    const handle = document.createElement('span');
+                    handle.className = 'drag-handle';
+                    handle.textContent = '≡';
+                    handle.draggable = true;
+                    handle.addEventListener('dragstart', e => {
+                        e.stopPropagation();
+                        dragSourceKey = v.k;
+                        e.dataTransfer.setData('application/x-realtor-key', v.k);
+                        e.dataTransfer.effectAllowed = 'move';
+                        // Highlight source row
+                        row.classList.add('drop-target-source');
+                        // Show minimal overlay
+                        domDragOverlay.textContent = v.task || TASK_TYPES[v.type]?.name || 'Блок';
+                        domDragOverlay.style.background = v.type >= 0 ? TASK_TYPES[v.type].color : 'var(--accent)';
+                        domDragOverlay.style.display = 'block';
+                    });
+                    handle.addEventListener('drag', e => {
+                        domDragOverlay.style.left = (e.clientX - 60) + 'px';
+                        domDragOverlay.style.top = (e.clientY - 20) + 'px';
+                    });
+                    handle.addEventListener('dragend', () => {
+                        domDragOverlay.style.display = 'none';
+                        row.classList.remove('drop-target-source');
+                        $$('#schedule-grid .row.drop-target').forEach(r => r.classList.remove('drop-target'));
+                        dragSourceKey = null;
+                    });
+
+                    tc.appendChild(handle);
+                    tc.appendChild(document.createTextNode(' ' + v.range));
+                    if (v.merged) {
+                        const b = document.createElement('span');
+                        b.className = 'badge';
+                        b.textContent = `×${v.span}`;
+                        tc.appendChild(b);
+                    }
+
+                    const cc = document.createElement('div');
+                    cc.className = 'task-col';
+
+                    const typeLabel = document.createElement('div');
+                    typeLabel.className = 'task-type-label';
+                    if (v.type >= 0 && v.type < 9) {
+                        typeLabel.textContent = TASK_TYPES[v.type].name;
+                        typeLabel.classList.add('type-label-' + v.type);
+                    } else {
+                        typeLabel.textContent = '—';
+                        typeLabel.style.color = 'var(--text-dim)';
+                    }
+
+                    const tx = document.createElement('div');
+                    tx.className = 'task-desc';
+                    if (v.task && v.type >= 0) {
+                        tx.textContent = v.task;
+                        if (v.status === 'completed') tx.classList.add('done');
+                        if (v.status === 'blocked') tx.classList.add('blocked');
+                    } else if (v.type >= 0 && !v.task) {
+                        tx.textContent = TASK_TYPES[v.type].name;
+                    } else {
+                        tx.textContent = '— пусто —';
+                        tx.classList.add('empty');
+                    }
+
+                    const mp = document.createElement('div');
+                    mp.className = 'metric-line';
+                    if (v.metric) mp.textContent = '📊 ' + v.metric;
+                    else mp.textContent = '';
+
+                    const dot = document.createElement('span');
+                    dot.className = 'status-dot';
+                    dot.dataset.k = v.k;
+                    if (v.status === 'completed') { dot.classList.add('s-done'); dot.textContent = '✓'; }
+                    else if (v.status === 'blocked') { dot.classList.add('s-blocked'); dot.textContent = '!'; }
+                    else { dot.classList.add('s-pending'); dot.textContent = '○'; }
+
+                    cc.append(typeLabel, tx, mp, dot);
+                    row.append(tc, cc);
+                    frag.appendChild(row);
+                });
+
+                domGrid.innerHTML = '';
+                domGrid.appendChild(frag);
+                domCnt.textContent = list.length;
+                attachEvents();
+                updateBar();
+            }
+
+            // ── Move block logic ──────────────────
+            function moveBlock(sourceKey, targetKey) {
+                if (!sourceKey || !targetKey || sourceKey === targetKey) return;
+                const sourceIdx = timeKeys.indexOf(sourceKey);
+                const targetIdx = timeKeys.indexOf(targetKey);
+                if (sourceIdx < 0 || targetIdx < 0) return;
+                const b = state.blocks[sourceKey];
+                if (!b) return; // nothing to move
+                const span = Math.max(1, b.span || 1);
+                // Prevent moving into its own range
+                if (targetIdx >= sourceIdx && targetIdx < sourceIdx + span) return;
+                // Ensure target range fits
+                if (targetIdx + span > timeKeys.length) return;
+
+                // Remove source block entirely
+                for (let i = 0; i < span; i++) {
+                    delete state.blocks[timeKeys[sourceIdx + i]];
+                }
+                // Clear target range (delete existing blocks)
+                for (let i = 0; i < span; i++) {
+                    delete state.blocks[timeKeys[targetIdx + i]];
+                }
+                // Place block at target start
+                state.blocks[targetKey] = { ...b, span };
+                save();
+                // Update selection: select the new block
+                sel.clear();
+                sel.add(targetKey);
+                focused = targetKey;
+                render();
+                // Scroll to new position
+                const newRow = document.querySelector(`.row[data-k="${targetKey}"]`);
+                if (newRow) newRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+
+            function attachEvents() {
+                $$('#schedule-grid .row').forEach(r => {
+                    r.addEventListener('mousedown', onDown);
+                    r.addEventListener('mouseenter', onEnter);
+                    r.addEventListener('mouseup', onUp);
+                    const dot = r.querySelector('.status-dot');
+                    if (dot) dot.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); cycle(dot.dataset.k); });
+                });
+            }
+
+            // ── Cycle status ──────────────────────
+            function cycle(k) {
+                const b = state.blocks[k];
+                const cur = b ? b.status : 'pending';
+                const nxt = cur === 'pending' ? 'completed' : cur === 'completed' ? 'blocked' : 'pending';
+                if (!b && nxt === 'pending') return;
+                if (!b) state.blocks[k] = { task:'', metric:'', status:nxt, type:-1, span:1 };
+                else b.status = nxt;
+                save(); render(); if (focused === k) focus(k);
+            }
+
+            // ── Drag selection ────────────────────
+            function onDown(e) {
+                // Ignore if target is drag handle or inside handle
+                if (e.target.closest('.drag-handle')) return;
+                const k = e.currentTarget.dataset.k; if (!k) return;
+                mouseDown = k; mouseDownAt = Date.now(); dragStart = k; dragEnd = k; dragging = false;
+                if (e.shiftKey && focused) { selectRange(focused, k); dragStart = focused; dragEnd = k; dragging = true; render(); return; }
+                sel.clear(); sel.add(k); render();
+            }
+
+            function onEnter(e) {
+                if (mouseDown === null) return;
+                const k = e.currentTarget.dataset.k; if (!k || k === dragEnd) return;
+                dragging = true; dragEnd = k; selectRange(dragStart, k); render();
+            }
+
+            function onUp(e) {
+                const k = e.currentTarget.dataset.k;
+                const elapsed = Date.now() - mouseDownAt;
+                mouseDown = null;
+                if (!dragging && elapsed < 300 && k === dragStart) {
+                    sel.clear(); render(); openEdit(k);
+                } else if (dragging) {
+                    selectRange(dragStart, dragEnd||dragStart); render();
+                    updateBar();
+                }
+                dragStart = dragEnd = null; dragging = false; mouseDown = null;
+            }
+
+            function selectRange(a, b) {
+                const keys = timeKeys;
+                const ia = keys.indexOf(a), ib = keys.indexOf(b);
+                if (ia<0||ib<0) return;
+                const s = Math.min(ia,ib), e = Math.max(ia,ib);
+                sel.clear();
+                for (let i=s; i<=e; i++) sel.add(keys[i]);
+            }
+
+            function updateBar() {
+                if (sel.size > 1) { domMCnt.textContent = sel.size; domBar.classList.add('visible'); }
+                else domBar.classList.remove('visible');
+            }
+
+            // ── Merge ─────────────────────────────
+            domBMerge.addEventListener('click', () => {
+                if (sel.size < 2) return;
+                const sorted = [...sel].sort((a,b)=>toMin(a)-toMin(b));
+                const fi = timeKeys.indexOf(sorted[0]), li = timeKeys.indexOf(sorted[sorted.length-1]);
+                if (fi<0||li<0||li-fi+1!==sorted.length) {
+                    const all = [];
+                    for (let i=fi; i<=li; i++) all.push(timeKeys[i]);
+                    sel.clear(); all.forEach(k=>sel.add(k));
+                }
+                const fin = [...sel].sort((a,b)=>toMin(a)-toMin(b));
+                const mk = fin[0];
+                let task='', metric='', status='pending', type=-1;
+                for (const k of fin) {
+                    const b = state.blocks[k];
+                    if (b) {
+                        if (b.task) { task=b.task; metric=b.metric||''; status=b.status||'pending'; type=b.type!==undefined?b.type:-1; break; }
+                        else if (b.type !== undefined && b.type >= 0) { type = b.type; }
+                    }
+                }
+                state.blocks[mk] = { task, metric, status, type, span: fin.length };
+                for (let i=1; i<fin.length; i++) delete state.blocks[fin[i]];
+                sel.clear(); domBar.classList.remove('visible'); focused = mk;
+                save(); render(); focus(mk);
+            });
+
+            domBCancel.addEventListener('click', () => { sel.clear(); domBar.classList.remove('visible'); render(); });
+
+            // ── Modal ─────────────────────────────
+            function openEdit(k) {
+                modalKey = k;
+                const b = state.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span:1 };
+                const span = b.span||1;
+                domMRange.textContent = rangeStr(k, span);
+                domMTaskType.value = (b.type !== undefined && b.type >= 0) ? String(b.type) : '-1';
+                domMTask.value = b.task||'';
+                domMMetric.value = b.metric||'';
+                domMStatus.value = b.status||'pending';
+                domMSplit.style.display = span > 1 ? 'inline-block' : 'none';
+                domModalOverlay.classList.add('open');
+                setTimeout(()=>domMTask.focus(), 100);
+            }
+
+            function closeEdit() { domModalOverlay.classList.remove('open'); modalKey = null; if (focused) focus(focused); domGrid.focus(); }
+
+            domMSave.addEventListener('click', () => {
+                if (!modalKey) return;
+                const k = modalKey;
+                const b = state.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span:1 };
+                b.type = parseInt(domMTaskType.value, 10);
+                b.task = domMTask.value.trim();
+                b.metric = domMMetric.value.trim();
+                b.status = domMStatus.value;
+                if (b.type < 0 && !b.task && !b.metric && b.status==='pending' && (b.span||1)<=1) delete state.blocks[k];
+                else state.blocks[k] = b;
+                save(); closeEdit(); render(); focus(k);
+            });
+
+            domMCancel.addEventListener('click', closeEdit);
+            domModalOverlay.addEventListener('click', e => { if (e.target===domModalOverlay) closeEdit(); });
+
+            domMDelete.addEventListener('click', () => {
+                if (!modalKey) return;
+                delete state.blocks[modalKey];
+                save(); closeEdit(); render(); focus(modalKey);
+            });
+
+            domMSplit.addEventListener('click', () => {
+                if (!modalKey) return;
+                const b = state.blocks[modalKey];
+                if (!b || !b.span || b.span <= 1) return;
+                const span = b.span, idx = timeKeys.indexOf(modalKey);
+                if (idx<0) return;
+                state.blocks[modalKey] = { task:b.task||'', metric:b.metric||'', status:b.status||'pending', type:b.type!==undefined?b.type:-1, span:1 };
+                for (let i=1; i<span && idx+i<timeKeys.length; i++)
+                    state.blocks[timeKeys[idx+i]] = { task:'', metric:'', status:'pending', type:-1, span:1 };
+                save(); closeEdit(); render(); focus(modalKey);
+            });
+
+            // ── Keyboard nav ──────────────────────
+            function focus(k) {
+                focused = k;
+                $$('#schedule-grid .row').forEach(r => {
+                    r.classList.remove('focused');
+                    if (r.dataset.k === k) { r.classList.add('focused'); r.scrollIntoView({ block:'nearest', behavior:'smooth' }); }
+                });
+                if (!dragging && sel.size <= 1) { sel.clear(); if (k) sel.add(k); updateBar(); }
+            }
+
+            function nav(dir) {
+                const list = visible();
+                if (!list.length) return;
+                let idx = focused ? list.findIndex(v=>v.k===focused) : -1;
+                if (idx<0) { const nk=nowKey(); idx = list.findIndex(v=>v.k===nk); if(idx<0) idx=0; }
+                idx = dir==='up' ? Math.max(0,idx-1) : Math.min(list.length-1,idx+1);
+                const k = list[idx].k;
+                focus(k); sel.clear(); sel.add(k); domBar.classList.remove('visible'); render(); focus(k);
+            }
+
+            function onKey(e) {
+                if (domModalOverlay.classList.contains('open')) {
+                    if (e.key==='Escape') { e.preventDefault(); closeEdit(); }
+                    else if (e.key==='Enter' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); domMSave.click(); }
+                    return;
+                }
+                const t = document.activeElement?.tagName?.toLowerCase();
+                if (t==='input'||t==='textarea'||t==='select') {
+                    if (e.key==='Escape') { document.activeElement.blur(); domGrid.focus(); e.preventDefault(); }
+                    return;
+                }
+                switch (e.key) {
+                    case 'o': case 'O': e.preventDefault(); domObj.focus(); domObj.select(); break;
+                    case 'c': case 'C': e.preventDefault(); domInt.focus(); break;
+                    case 'ArrowUp': e.preventDefault(); nav('up'); break;
+                    case 'ArrowDown': e.preventDefault(); nav('down'); break;
+                    case 'Enter': e.preventDefault(); if (focused) openEdit(focused); else if (sel.size===1) openEdit([...sel][0]); break;
+                    case 'Escape': e.preventDefault(); sel.clear(); domBar.classList.remove('visible'); focused=null; render(); domGrid.focus(); break;
+                    case 'm': case 'M': if (sel.size>1 && !e.ctrlKey && !e.metaKey) { e.preventDefault(); domBMerge.click(); } break;
+                }
+            }
+
+            // ── Config ────────────────────────────
+            function onConfig() {
+                const iv = parseInt(domInt.value,10);
+                let s = Math.max(0,Math.min(23,parseInt(domStart.value,10)||6));
+                let e = Math.max(0,Math.min(23,parseInt(domEnd.value,10)||22));
+                if (s >= e) { if (e>0) s=e-1; else { s=6; e=22; } domStart.value=s; domEnd.value=e; }
+                const interval = [5,10,15,30].includes(iv) ? iv : 5;
+                const old = state.config;
+                const nxt = { interval, start:s, end:e };
+                if (old.interval!==interval || old.start!==s || old.end!==e) remap(old, nxt);
+                state.config = nxt;
+                domInt.value = interval; domStart.value = s; domEnd.value = e;
+                save(); timeKeys = genKeys(); sel.clear(); domBar.classList.remove('visible'); focused=null; render(); domGrid.focus();
+            }
+
+            function remap(old, nxt) {
+                const oKeys = genK(old), ranges = [];
+                let i=0;
+                while (i<oKeys.length) {
+                    const k = oKeys[i], b = state.blocks[k], span = b ? Math.max(1,b.span||1) : 1;
+                    const sm = toMin(k), em = sm + span*old.interval;
+                    if (b && (b.task || b.type>=0 || b.status!=='pending')) ranges.push({ sm, em, task:b.task||'', metric:b.metric||'', status:b.status||'pending', type:b.type!==undefined?b.type:-1 });
+                    i += span;
+                }
+                const nb = {}, nKeys = genK(nxt);
+                for (const nk of nKeys) {
+                    const nkm = toMin(nk), nke = nkm + nxt.interval;
+                    let best=0, bestR=null;
+                    for (const r of ranges) {
+                        const o = Math.max(0, Math.min(nke,r.em) - Math.max(nkm,r.sm));
+                        if (o > best) { best=o; bestR=r; }
+                    }
+                    if (bestR && best>0) nb[nk] = { task:bestR.task, metric:bestR.metric, status:bestR.status, type:bestR.type, span:1 };
+                }
+                state.blocks = nb;
+            }
+
+            function genK(c) {
+                const keys=[];
+                for (let m=c.start*60; m<c.end*60; m+=c.interval) keys.push(toKey(m));
+                return keys;
+            }
+
+            domInt.addEventListener('change', onConfig);
+            domStart.addEventListener('change', onConfig);
+            domEnd.addEventListener('change', onConfig);
+            domStart.addEventListener('input', ()=>{
+                if (parseInt(domStart.value,10) >= parseInt(domEnd.value,10))
+                    domEnd.value = Math.min(23, parseInt(domStart.value,10)+1);
+            });
+            domEnd.addEventListener('input', ()=>{
+                if (parseInt(domEnd.value,10) <= parseInt(domStart.value,10))
+                    domStart.value = Math.max(0, parseInt(domEnd.value,10)-1);
+            });
+
+            // ── Objective ─────────────────────────
+            domObj.addEventListener('input', () => { state.objective = domObj.value; save(); });
+
+            // ── Clock ─────────────────────────────
+            function tick() {
+                const d = new Date();
+                domClock.textContent = String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+                if (d.getSeconds() % 15 === 0) updateNow();
+            }
+            function updateNow() {
+                const nk = nowKey();
+                $$('#schedule-grid .row').forEach(r => { r.classList.remove('now'); if (r.dataset.k===nk) r.classList.add('now'); });
+            }
+            setInterval(tick, 1000);
+
+            // ── Init ──────────────────────────────
+            function init() {
+                domInt.value = state.config.interval;
+                domStart.value = state.config.start;
+                domEnd.value = state.config.end;
+                domObj.value = state.objective||'';
+
+                renderSidebar();
+
+                timeKeys = genKeys();
+                render();
+
+                const nk = nowKey();
+                if (nk && timeKeys.includes(nk)) { focused=nk; sel.add(nk); render(); focus(nk); }
+                else if (timeKeys.length) { focused=timeKeys[0]; sel.add(timeKeys[0]); render(); focus(timeKeys[0]); }
+
+                tick();
+                document.addEventListener('keydown', onKey);
+                domGrid.tabIndex = 0;
+                domGrid.focus();
+
+                document.addEventListener('mousedown', e => {
+                    if (!e.target.closest('#schedule-grid') && !e.target.closest('#merge-bar') && !e.target.closest('#modal-overlay') && !e.target.closest('#sidebar')) {
+                        if (sel.size && !dragging) { sel.clear(); domBar.classList.remove('visible'); render(); }
+                    }
+                });
+                window.addEventListener('blur', () => { mouseDown=null; dragging=false; dragStart=dragEnd=null; });
+
+                console.log('План · Риелтор — ready');
+            }
+
+            init();
+        })();
+    </script>
 </body>
 </html>
