@@ -67,7 +67,7 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--border-focus); }
 
-        /* ── Layout: sidebar + main + right-panel ───────────────────────── */
+        /* ── Layout: days-panel + sidebar + main + right-panel ───────────────────────── */
         #app {
             max-width: 1400px;
             margin: 0 auto;
@@ -75,6 +75,122 @@
             display: flex;
             gap: var(--space-lg);
             min-height: 100vh;
+        }
+
+        /* ── Days Panel (Left-most) ───────────────────────── */
+        #days-panel {
+            width: 140px;
+            min-width: 140px;
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--space-sm);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        #days-panel h2 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            padding: var(--space-xs) var(--space-sm);
+            margin-bottom: var(--space-xs);
+            border-bottom: 1px solid var(--border);
+        }
+
+        #days-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .day-item {
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.75rem;
+            border: 1px solid transparent;
+            transition: all 0.12s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4px;
+            background: var(--bg-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-item:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: var(--border-focus);
+        }
+
+        .day-item.active {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .day-item-date {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--text-title);
+        }
+
+        .day-item-delete {
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.12s;
+            cursor: pointer;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            padding: 2px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .day-item:hover .day-item-delete {
+            opacity: 1;
+        }
+
+        .day-item-delete:hover {
+            background: var(--red-dim);
+            color: var(--red);
+        }
+
+        #btn-add-day {
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.12s;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        #btn-add-day:hover {
+            background: var(--accent);
+            color: #fff;
         }
 
         /* ── Sidebar ──────────────────────────── */
@@ -718,6 +834,16 @@
         }
 
         /* ── Responsive ───────────────────────── */
+        @media (max-width: 1200px) {
+            #days-panel {
+                width: 120px;
+                min-width: 120px;
+            }
+            .day-item {
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+        }
         @media (max-width: 1000px) {
             #right-panel {
                 display: none;
@@ -727,6 +853,33 @@
             #app {
                 flex-direction: column;
                 padding: var(--space-md);
+            }
+            #days-panel {
+                width: 100%;
+                min-width: 100%;
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: var(--space-sm);
+                gap: 4px;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+            #days-panel h2 {
+                width: 100%;
+                margin-bottom: 0;
+            }
+            #days-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .day-item {
+                flex: 0 1 auto;
+            }
+            #btn-add-day {
+                width: 100%;
+                margin-top: var(--space-sm);
             }
             #sidebar {
                 width: 100%;
@@ -760,6 +913,13 @@
     <div id="drag-overlay"></div>
 
     <div id="app">
+        <!-- ═══ DAYS PANEL ═══ -->
+        <aside id="days-panel">
+            <h2>Дни</h2>
+            <div id="days-list"></div>
+            <button id="btn-add-day">+ Новый</button>
+        </aside>
+
         <!-- ═══ SIDEBAR ═══ -->
         <aside id="sidebar">
             <h2>Типы задач</h2>
@@ -880,10 +1040,10 @@
     <script>
         (function() {
             // ──────────────────────────────────────
-            // Realtor Day Planner
+            // Realtor Day Planner with Multiple Days
             // ──────────────────────────────────────
 
-            const KEY = 'realtor-plan-v1';
+            const STORAGE_KEY = 'realtor-plan-v2';
 
             // 9 task types (Russian)
             const TASK_TYPES = [
@@ -898,17 +1058,23 @@
                 { name: 'Задатки/сделки',             color: '#f1c40f' }
             ];
 
-            const DEF = {
-                config: { interval: 5, start: 6, end: 22 },
-                date: new Date().toISOString().slice(0, 10),
+            const DEF_DAY = {
                 objective: '',
                 blocks: {}
+            };
+
+            const DEF_CONFIG = {
+                interval: 5,
+                start: 6,
+                end: 22
             };
 
             // ── DOM refs ──────────────────────────
             const $ = s => document.querySelector(s);
             const $$ = s => document.querySelectorAll(s);
 
+            const domDaysList = $('#days-list');
+            const domBtnAddDay = $('#btn-add-day');
             const domClock = $('#clock');
             const domObj = $('#objective-input');
             const domInt = $('#interval-select');
@@ -935,31 +1101,45 @@
             const domTasksList = $('#tasks-list');
 
             // ── State ─────────────────────────────
-            let state = load();
+            let allDays = loadAllDays();
+            let currentDate = findLatestDay();
+            let config = { ...DEF_CONFIG };
             let timeKeys = [];
             let sel = new Set();
             let focused = null;
             let dragStart = null, dragEnd = null, dragging = false, mouseDown = null, mouseDownAt = 0;
             let modalKey = null;
-            let dragSourceKey = null; // for block move via drag handle
+            let dragSourceKey = null;
 
-            // ── Persistence ───────────────────────
-            function load() {
+            // ── Persistence: All Days ────────────────────────
+            function loadAllDays() {
                 try {
-                    const raw = localStorage.getItem(KEY);
+                    const raw = localStorage.getItem(STORAGE_KEY);
                     if (raw) {
-                        const p = JSON.parse(raw);
-                        return { ...JSON.parse(JSON.stringify(DEF)), ...p,
-                            config: { ...DEF.config, ...(p.config || {}) }
-                        };
+                        const data = JSON.parse(raw);
+                        return data.days || {};
                     }
                 } catch (_) {}
-                return JSON.parse(JSON.stringify(DEF));
+                return {};
             }
 
-            function save() {
-                state.date = new Date().toISOString().slice(0, 10);
-                try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {}
+            function saveAllDays() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({ days: allDays }));
+                } catch (_) {}
+            }
+
+            function findLatestDay() {
+                const dates = Object.keys(allDays);
+                if (dates.length === 0) return new Date().toISOString().slice(0, 10);
+                return dates.sort().pop();
+            }
+
+            function getCurrentDayData() {
+                if (!allDays[currentDate]) {
+                    allDays[currentDate] = JSON.parse(JSON.stringify(DEF_DAY));
+                }
+                return allDays[currentDate];
             }
 
             // ── Time helpers ──────────────────────
@@ -971,23 +1151,24 @@
             function add(k, n) { return toKey(toMin(k) + n); }
 
             function genKeys() {
-                const { interval, start, end } = state.config;
                 const keys = [];
-                for (let m = start*60; m < end*60; m += interval) keys.push(toKey(m));
+                for (let m = config.start*60; m < config.end*60; m += config.interval) keys.push(toKey(m));
                 return keys;
             }
 
-            function endKey(k, span) { return add(k, (span||1)*state.config.interval); }
+            function endKey(k, span) { return add(k, (span||1)*config.interval); }
             function rangeStr(k, span) { return `${k} – ${endKey(k,span)}`; }
 
-            // ── Build visible ─────────────────────
+            // ── Build visible ───��─────────────────
             function visible() {
-                const keys = timeKeys, out = [];
+                const keys = timeKeys;
+                const dayData = getCurrentDayData();
+                const out = [];
                 let skip = 0;
                 for (let i=0; i<keys.length; i++) {
                     if (skip > 0) { skip--; continue; }
                     const k = keys[i];
-                    const b = state.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span:1 };
+                    const b = dayData.blocks[k] || { task:'', metric:'', status:'pending', type:-1, span:1 };
                     const span = Math.max(1, Math.min(b.span||1, keys.length-i));
                     skip = span - 1;
                     out.push({ k, task:b.task||'', metric:b.metric||'', status:b.status||'pending', type:b.type!==undefined?b.type:-1, span, range:rangeStr(k,span), merged:span>1 });
@@ -998,472 +1179,328 @@
             // ── Now key ───────────────────────────
             function nowKey() {
                 const d = new Date(), m = d.getHours()*60+d.getMinutes();
-                const { interval, start, end } = state.config;
-                const s=start*60, eM=end*60;
-                if (m < s || m >= eM) return null;
-                return toKey(s + Math.floor((m-s)/interval)*interval);
+                let closest = null, dist = Infinity;
+                for (const k of timeKeys) {
+                    const km = toMin(k);
+                    const d = Math.abs(km - m);
+                    if (d < dist) { dist = d; closest = k; }
+                }
+                return closest;
             }
 
-            // ── Render sidebar ────────────────────
-            function renderSidebar() {
-                domTypeList.innerHTML = '';
-                TASK_TYPES.forEach((tt, i) => {
+            // ── Days Panel ────────────────────────
+            function renderDaysList() {
+                domDaysList.innerHTML = '';
+                const dates = Object.keys(allDays).sort();
+                for (const date of dates) {
                     const item = document.createElement('div');
-                    item.className = 'task-type-item';
-                    item.draggable = true;
-                    item.dataset.typeIndex = i;
-
-                    const dot = document.createElement('span');
-                    dot.className = 'color-dot';
-                    dot.style.background = tt.color;
-
-                    const label = document.createElement('span');
-                    label.textContent = tt.name;
-
-                    item.append(dot, label);
-
-                    item.addEventListener('dragstart', e => {
-                        e.dataTransfer.setData('text/plain', String(i));
-                        e.dataTransfer.effectAllowed = 'copy';
-                        domDragOverlay.textContent = tt.name;
-                        domDragOverlay.style.background = tt.color;
-                        domDragOverlay.style.display = 'block';
-                    });
-
-                    item.addEventListener('drag', e => {
-                        domDragOverlay.style.left = (e.clientX - 60) + 'px';
-                        domDragOverlay.style.top = (e.clientY - 20) + 'px';
-                    });
-
-                    item.addEventListener('dragend', () => {
-                        domDragOverlay.style.display = 'none';
-                        $$('#schedule-grid .row.drop-target').forEach(r => r.classList.remove('drop-target'));
-                    });
-
-                    domTypeList.appendChild(item);
-                });
-            }
-
-            // ── Render right panel (task list) ────
-            function renderTasksList() {
-                domTasksList.innerHTML = '';
-                const list = visible();
-                list.forEach(v => {
-                    if (!v.task) return; // Skip empty tasks
-
-                    const item = document.createElement('div');
-                    item.className = 'task-item';
-                    if (focused === v.k) item.classList.add('active');
-
-                    const time = document.createElement('div');
-                    time.className = 'task-item-time';
-                    time.textContent = v.range;
-
-                    const title = document.createElement('div');
-                    title.className = 'task-item-title' + (v.task ? '' : ' empty');
-                    title.textContent = v.task || '(Нет описания)';
-
-                    const status = document.createElement('div');
-                    status.className = 'task-item-status';
-                    const statusText = v.status === 'completed' ? '✓ Выполнено' : 
-                                       v.status === 'blocked' ? '⊘ Заблокировано' : 
-                                       '◉ В работе';
-                    status.textContent = statusText;
-
-                    item.append(time, title, status);
-                    item.addEventListener('click', () => {
-                        focused = v.k;
-                        sel.clear();
-                        render();
-                        renderTasksList();
-                        // Scroll to the task in the grid
-                        const row = document.querySelector(`[data-k="${v.k}"]`);
-                        if (row) row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    });
-
-                    domTasksList.appendChild(item);
-                });
-            }
-
-            // ── Render grid ───────────────────────
-            function render() {
-                timeKeys = genKeys();
-                const list = visible(), nk = nowKey();
-                const frag = document.createDocumentFragment();
-                list.forEach(v => {
-                    const row = document.createElement('div');
-                    row.className = 'row';
-                    if (v.merged) row.classList.add('merged');
-                    if (sel.has(v.k)) row.classList.add('selected');
-                    if (focused === v.k) row.classList.add('focused');
-                    if (v.k === nk) row.classList.add('now');
-                    if (v.type >= 0 && v.type < 9) {
-                        row.classList.add('type-' + v.type);
-                        row.classList.add('has-tasktype');
-                    }
-                    row.dataset.k = v.k;
-                    row.dataset.span = v.span;
-
-                    // Make rows droppable for sidebar types and block move
-                    row.addEventListener('dragover', e => {
-                        e.preventDefault();
-                        // Accept both sidebar type drop and block move
-                        if (e.dataTransfer.types.includes('text/plain') || e.dataTransfer.types.includes('application/x-realtor-key')) {
-                            e.dataTransfer.dropEffect = e.dataTransfer.types.includes('application/x-realtor-key') ? 'move' : 'copy';
-                            $$('#schedule-grid .row.drop-target').forEach(r => r.classList.remove('drop-target'));
-                            row.classList.add('drop-target');
-                        }
-                    });
-                    row.addEventListener('dragleave', () => {
-                        row.classList.remove('drop-target');
-                    });
-                    row.addEventListener('drop', e => {
-                        e.preventDefault();
-                        row.classList.remove('drop-target');
-                        // Check for block move first
-                        if (e.dataTransfer.types.includes('application/x-realtor-key')) {
-                            const sourceKey = e.dataTransfer.getData('application/x-realtor-key');
-                            if (sourceKey && sourceKey !== row.dataset.k) {
-                                moveBlock(sourceKey, row.dataset.k);
-                            }
-                            return;
-                        }
-
-                        // Type was dropped
-                        const typeStr = e.dataTransfer.getData('text/plain');
-                        if (typeStr) {
-                            const type = parseInt(typeStr, 10);
-                            if (!isNaN(type) && type >= 0 && type < 9) {
-                                state.blocks[v.k] = state.blocks[v.k] || {};
-                                state.blocks[v.k].type = type;
-                                save();
-                                render();
-                                renderTasksList();
-                            }
-                        }
-                    });
-
-                    row.addEventListener('click', e => {
-                        const rect = row.getBoundingClientRect();
-                        const isStatus = e.clientX > rect.right - 40;
-
-                        if (isStatus) {
-                            openModal(v.k);
-                        } else {
-                            if (e.ctrlKey || e.metaKey) {
-                                sel.has(v.k) ? sel.delete(v.k) : sel.add(v.k);
-                            } else if (e.shiftKey) {
-                                const list = visible();
-                                const fi = list.findIndex(x => x.k === focused);
-                                const ci = list.findIndex(x => x.k === v.k);
-                                if (fi >= 0 && ci >= 0) {
-                                    const [s, e] = fi < ci ? [fi, ci] : [ci, fi];
-                                    for (let i = s; i <= e; i++) sel.add(list[i].k);
-                                }
-                            } else {
-                                sel.clear();
-                                sel.add(v.k);
-                            }
-                            focused = v.k;
-                        }
-                        render();
-                        renderTasksList();
-                    });
-
-                    row.addEventListener('dblclick', () => openModal(v.k));
-
-                    // Time col
-                    const tcol = document.createElement('div');
-                    tcol.className = 'time-col';
-                    const timeText = document.createTextNode(v.range);
-                    tcol.appendChild(timeText);
-                    if (v.merged) {
-                        const badge = document.createElement('span');
-                        badge.className = 'badge';
-                        badge.textContent = `×${v.span}`;
-                        tcol.appendChild(badge);
-                    }
-
-                    // Drag handle
-                    const dh = document.createElement('span');
-                    dh.className = 'drag-handle';
-                    dh.textContent = '≡';
-                    dh.draggable = true;
-                    dh.addEventListener('dragstart', e => {
-                        e.dataTransfer.setData('application/x-realtor-key', v.k);
-                        e.dataTransfer.effectAllowed = 'move';
-                        domDragOverlay.textContent = v.task || '(блок)';
-                        domDragOverlay.style.background = 'rgba(0,0,0,0.4)';
-                        domDragOverlay.style.display = 'block';
-                    });
-                    dh.addEventListener('drag', e => {
-                        domDragOverlay.style.left = (e.clientX - 60) + 'px';
-                        domDragOverlay.style.top = (e.clientY - 20) + 'px';
-                    });
-                    dh.addEventListener('dragend', () => {
-                        domDragOverlay.style.display = 'none';
-                    });
-                    tcol.insertBefore(dh, tcol.firstChild);
-
-                    row.appendChild(tcol);
-
-                    // Task cell
-                    const tc = document.createElement('div');
-                    tc.className = 'task-col';
-
-                    if (v.type >= 0 && v.type < 9) {
-                        const label = document.createElement('div');
-                        label.className = 'task-type-label type-label-' + v.type;
-                        label.textContent = TASK_TYPES[v.type].name;
-                        tc.appendChild(label);
-                    }
-
-                    const tdesc = document.createElement('div');
-                    tdesc.className = 'task-desc' + (v.task ? '' : ' empty') + (v.status === 'completed' ? ' done' : '') + (v.status === 'blocked' ? ' blocked' : '');
-                    tdesc.textContent = v.task || '(no task)';
-                    tc.appendChild(tdesc);
-
-                    if (v.metric) {
-                        const ml = document.createElement('div');
-                        ml.className = 'metric-line';
-                        ml.textContent = v.metric;
-                        tc.appendChild(ml);
-                    }
-
-                    // Status dot
-                    const sd = document.createElement('div');
-                    sd.className = 'status-dot s-' + v.status;
-                    sd.textContent = v.status === 'completed' ? '✓' : v.status === 'blocked' ? '!' : '○';
-                    sd.addEventListener('click', e => {
+                    item.className = 'day-item' + (date === currentDate ? ' active' : '');
+                    item.innerHTML = `
+                        <div class="day-item-date">${formatDateDisplay(date)}</div>
+                        <div class="day-item-delete">✕</div>
+                    `;
+                    item.querySelector('.day-item-date').addEventListener('click', () => switchDay(date));
+                    item.querySelector('.day-item-delete').addEventListener('click', (e) => {
                         e.stopPropagation();
-                        openModal(v.k);
+                        deleteDay(date);
                     });
-                    tc.appendChild(sd);
+                    domDaysList.appendChild(item);
+                }
+            }
 
-                    row.appendChild(tc);
-                    frag.appendChild(row);
-                });
+            function formatDateDisplay(dateStr) {
+                const d = new Date(dateStr + 'T00:00:00');
+                const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+                const day = days[d.getDay()];
+                const month = String(d.getDate()).padStart(2, '0');
+                return `${day} ${month}`;
+            }
 
+            function switchDay(date) {
+                currentDate = date;
+                renderDaysList();
+                refresh();
+            }
+
+            function addNewDay() {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const newDate = tomorrow.toISOString().slice(0, 10);
+                if (!allDays[newDate]) {
+                    allDays[newDate] = JSON.parse(JSON.stringify(DEF_DAY));
+                    saveAllDays();
+                    currentDate = newDate;
+                    renderDaysList();
+                    refresh();
+                }
+            }
+
+            function deleteDay(date) {
+                if (Object.keys(allDays).length <= 1) {
+                    alert('Нельзя удалить последний день');
+                    return;
+                }
+                delete allDays[date];
+                saveAllDays();
+                if (currentDate === date) {
+                    currentDate = findLatestDay();
+                }
+                renderDaysList();
+                refresh();
+            }
+
+            // ── Rendering Grid ───────────────────
+            function renderGrid() {
                 domGrid.innerHTML = '';
-                domGrid.appendChild(frag);
+                const rows = visible();
+                const nk = nowKey();
+                for (const row of rows) {
+                    const r = document.createElement('div');
+                    r.className = `row type-${row.type}`;
+                    if (row.merged) r.classList.add('merged');
+                    if (sel.has(row.k)) r.classList.add('selected');
+                    if (focused === row.k) r.classList.add('focused');
+                    if (row.k === nk) r.classList.add('now');
+                    r.innerHTML = `
+                        <div class="time-col">
+                            <span class="drag-handle">≡</span>
+                            ${row.k}
+                            ${row.merged ? `<span class="badge">+${row.span-1}</span>` : ''}
+                        </div>
+                        <div class="task-col">
+                            ${row.type >= 0 ? `<div class="task-type-label type-label-${row.type}">${TASK_TYPES[row.type].name}</div>` : ''}
+                            <div class="task-desc ${!row.task ? 'empty' : ''} ${row.status === 'completed' ? 'done' : ''} ${row.status === 'blocked' ? 'blocked' : ''}">${row.task || '(пусто)'}</div>
+                            ${row.metric ? `<div class="metric-line">${row.metric}</div>` : ''}
+                            <div class="status-dot s-${row.status}"></div>
+                        </div>
+                    `;
+                    r.addEventListener('click', (e) => clickRow(e, row.k));
+                    r.addEventListener('mousedown', (e) => startDrag(e, row.k));
+                    r.querySelector('.drag-handle').addEventListener('mousedown', (e) => startBlockDrag(e, row.k));
+                    domGrid.appendChild(r);
+                }
+                updateTasksList();
+            }
 
+            // ── Row interactions ──────────────────
+            function clickRow(e, k) {
+                if (e.shiftKey) {
+                    if (focused !== null) {
+                        const rows = visible();
+                        const focusIdx = rows.findIndex(r => r.k === focused);
+                        const clickIdx = rows.findIndex(r => r.k === k);
+                        const [start, end] = focusIdx < clickIdx ? [focusIdx, clickIdx] : [clickIdx, focusIdx];
+                        for (let i=start; i<=end; i++) sel.add(rows[i].k);
+                    } else {
+                        sel.add(k);
+                    }
+                } else if (e.ctrlKey || e.metaKey) {
+                    if (sel.has(k)) sel.delete(k);
+                    else sel.add(k);
+                } else {
+                    sel.clear();
+                    sel.add(k);
+                }
+                focused = k;
+                renderGrid();
                 updateMergeBar();
-                updateBlockCount();
             }
 
-            // ── Modal ─────────────────────────────
-            function openModal(k) {
-                modalKey = k;
-                const b = state.blocks[k] || {};
-                const span = b.span || 1;
-
-                domMRange.textContent = rangeStr(k, span);
-                domMTaskType.value = b.type !== undefined ? b.type : -1;
-                domMTask.value = b.task || '';
-                domMMetric.value = b.metric || '';
-                domMStatus.value = b.status || 'pending';
-                domMSplit.style.display = span > 1 ? 'block' : 'none';
-
-                domModalOverlay.classList.add('open');
-                domMTask.focus();
+            function startDrag(e, k) {
+                if (e.target.classList.contains('drag-handle')) return;
+                if (e.button !== 0) return;
+                dragStart = k;
+                mouseDown = e;
+                mouseDownAt = Date.now();
             }
 
-            function closeModal() {
-                domModalOverlay.classList.remove('open');
-                modalKey = null;
+            function startBlockDrag(e, k) {
+                if (e.button !== 0) return;
+                e.stopPropagation();
+                dragSourceKey = k;
+                mouseDown = e;
+                mouseDownAt = Date.now();
+                dragging = false;
             }
 
-            function saveBlock() {
-                if (modalKey !== null) {
-                    const k = modalKey;
-                    state.blocks[k] = state.blocks[k] || {};
-                    state.blocks[k].type = parseInt(domMTaskType.value, 10);
-                    state.blocks[k].task = domMTask.value;
-                    state.blocks[k].metric = domMMetric.value;
-                    state.blocks[k].status = domMStatus.value;
-                    save();
-                    closeModal();
-                    render();
-                    renderTasksList();
-                }
-            }
+            // ── Update config ─────────────────────
+            domInt.addEventListener('change', (e) => { config.interval = Number(e.target.value); refresh(); });
+            domStart.addEventListener('input', (e) => { config.start = Number(e.target.value); refresh(); });
+            domEnd.addEventListener('input', (e) => { config.end = Number(e.target.value); refresh(); });
 
-            function deleteBlock() {
-                if (modalKey !== null) {
-                    delete state.blocks[modalKey];
-                    save();
-                    closeModal();
-                    render();
-                    renderTasksList();
-                }
-            }
-
-            function splitBlock() {
-                if (modalKey !== null) {
-                    const k = modalKey, b = state.blocks[k], span = b.span || 1;
-                    if (span > 1) {
-                        const half = Math.ceil(span / 2);
-                        b.span = half;
-                        state.blocks[add(k, half*state.config.interval)] = {
-                            task: b.task,
-                            metric: b.metric,
-                            status: b.status,
-                            type: b.type,
-                            span: span - half
-                        };
-                        save();
-                        closeModal();
-                        render();
-                        renderTasksList();
+            // ── Tasks list ────────────────────────
+            function updateTasksList() {
+                domTasksList.innerHTML = '';
+                const dayData = getCurrentDayData();
+                const rows = visible();
+                for (const row of rows) {
+                    if (row.k === focused) {
+                        const item = document.createElement('div');
+                        item.className = 'task-item active';
+                        item.innerHTML = `
+                            <div class="task-item-time">${row.range}</div>
+                            <div class="task-item-title ${!row.task ? 'empty' : ''}">${row.task || '(пусто)'}</div>
+                            <div class="task-item-status">Статус: ${row.status === 'completed' ? 'Выполнено' : row.status === 'blocked' ? 'Заблокировано' : 'В работе'}</div>
+                        `;
+                        domTasksList.appendChild(item);
                     }
                 }
             }
 
-            function moveBlock(from, to) {
-                if (from === to) return;
-                const b = state.blocks[from];
-                if (b) {
-                    delete state.blocks[from];
-                    state.blocks[to] = b;
-                    save();
-                    focused = to;
-                    render();
-                    renderTasksList();
-                }
+            // ── Objective & Clock ─────────────────
+            domObj.addEventListener('input', (e) => {
+                getCurrentDayData().objective = e.target.value;
+                saveAllDays();
+            });
+
+            function updateUI() {
+                const dayData = getCurrentDayData();
+                domObj.value = dayData.objective || '';
+                const now = new Date();
+                domClock.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
             }
 
-            function updateBlockCount() {
-                let cnt = 0;
-                timeKeys.forEach(k => {
-                    if (state.blocks[k]) cnt++;
-                });
-                domCnt.textContent = String(timeKeys.length - cnt);
-            }
-
+            // ── Merge Bar ─────────────────────────
             function updateMergeBar() {
                 if (sel.size > 1) {
-                    domMCnt.textContent = String(sel.size);
+                    domMCnt.textContent = sel.size;
                     domBar.classList.add('visible');
                 } else {
                     domBar.classList.remove('visible');
                 }
             }
 
-            function mergeSelected() {
+            domBMerge.addEventListener('click', () => {
                 if (sel.size < 2) return;
-                const arr = Array.from(sel).sort((a, b) => toMin(a) - toMin(b));
-                const start = arr[0];
-                const span = arr.length;
-
-                state.blocks[start] = state.blocks[start] || {};
-                state.blocks[start].span = span;
-
-                arr.slice(1).forEach(k => delete state.blocks[k]);
+                const dayData = getCurrentDayData();
+                const rows = visible();
+                const skeys = Array.from(sel);
+                const minIdx = rows.findIndex(r => r.k === skeys[0]);
+                const maxIdx = rows.findIndex(r => skeys.includes(r.k));
+                let totalSpan = 0;
+                for (const sk of skeys) {
+                    const r = rows.find(x => x.k === sk);
+                    totalSpan += r.span;
+                }
+                const firstKey = skeys.sort((a,b) => toMin(a) - toMin(b))[0];
+                const b = dayData.blocks[firstKey] || {};
+                b.span = totalSpan;
+                dayData.blocks[firstKey] = b;
+                for (const sk of skeys) if (sk !== firstKey) delete dayData.blocks[sk];
+                saveAllDays();
                 sel.clear();
-                focused = start;
-                save();
-                render();
-                renderTasksList();
-            }
-
-            // ── Clock ─────────────────────────────
-            function updateClock() {
-                const d = new Date();
-                const h = String(d.getHours()).padStart(2, '0');
-                const m = String(d.getMinutes()).padStart(2, '0');
-                domClock.textContent = h + ':' + m;
-            }
-
-            // ── Events ────────────────────────────
-            domObj.addEventListener('change', () => {
-                state.objective = domObj.value;
-                save();
+                renderGrid();
+                updateMergeBar();
             });
 
-            domInt.addEventListener('change', () => {
-                state.config.interval = parseInt(domInt.value, 10);
-                save();
-                render();
-                renderTasksList();
-            });
-
-            domStart.addEventListener('change', () => {
-                state.config.start = parseInt(domStart.value, 10);
-                save();
-                render();
-                renderTasksList();
-            });
-
-            domEnd.addEventListener('change', () => {
-                state.config.end = parseInt(domEnd.value, 10);
-                save();
-                render();
-                renderTasksList();
-            });
-
-            domBMerge.addEventListener('click', mergeSelected);
             domBCancel.addEventListener('click', () => {
                 sel.clear();
-                render();
+                renderGrid();
+                updateMergeBar();
             });
 
-            domMSave.addEventListener('click', saveBlock);
-            domMCancel.addEventListener('click', closeModal);
-            domMDelete.addEventListener('click', deleteBlock);
-            domMSplit.addEventListener('click', splitBlock);
+            // ── Modal ──────────────────────────────
+            function openModal(k) {
+                const dayData = getCurrentDayData();
+                const rows = visible();
+                const row = rows.find(r => r.k === k);
+                if (!row) return;
+                modalKey = k;
+                domMRange.textContent = row.range;
+                const b = dayData.blocks[k] || {};
+                domMTaskType.value = b.type !== undefined ? b.type : '-1';
+                domMTask.value = b.task || '';
+                domMMetric.value = b.metric || '';
+                domMStatus.value = b.status || 'pending';
+                domMSplit.style.display = row.span > 1 ? 'block' : 'none';
+                domModalOverlay.classList.add('open');
+            }
 
-            document.addEventListener('keydown', e => {
-                if (domModalOverlay.classList.contains('open')) {
-                    if (e.key === 'Escape') { e.preventDefault(); closeModal(); }
-                    if (e.key === 'Enter') { e.preventDefault(); saveBlock(); }
-                    return;
-                }
+            domMSave.addEventListener('click', () => {
+                const dayData = getCurrentDayData();
+                const b = dayData.blocks[modalKey] || { span: 1 };
+                b.type = Number(domMTaskType.value);
+                b.task = domMTask.value;
+                b.metric = domMMetric.value;
+                b.status = domMStatus.value;
+                dayData.blocks[modalKey] = b;
+                saveAllDays();
+                domModalOverlay.classList.remove('open');
+                renderGrid();
+            });
 
-                if (e.key === 'Escape') {
-                    sel.clear();
-                    focused = null;
-                    render();
-                    renderTasksList();
-                } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    const list = visible();
-                    const fi = focused !== null ? list.findIndex(x => x.k === focused) : -1;
-                    const ni = e.key === 'ArrowDown' 
-                        ? (fi < 0 ? 0 : Math.min(fi + 1, list.length - 1))
-                        : (fi < 0 ? list.length - 1 : Math.max(fi - 1, 0));
-                    if (ni >= 0) {
-                        focused = list[ni].k;
-                        sel.clear();
-                        sel.add(focused);
-                        render();
-                        renderTasksList();
+            domMCancel.addEventListener('click', () => domModalOverlay.classList.remove('open'));
+            domMDelete.addEventListener('click', () => {
+                delete getCurrentDayData().blocks[modalKey];
+                saveAllDays();
+                domModalOverlay.classList.remove('open');
+                renderGrid();
+            });
+
+            // ── Keyboard ───────────────────────────
+            document.addEventListener('keydown', (e) => {
+                if (domModalOverlay.classList.contains('open')) return;
+                const rows = visible();
+                if (e.key === 'ArrowUp') {
+                    if (focused === null && rows.length) focused = rows[0].k;
+                    else {
+                        const idx = rows.findIndex(r => r.k === focused);
+                        if (idx > 0) focused = rows[idx-1].k;
                     }
+                    sel.clear(); sel.add(focused);
+                    e.preventDefault();
+                } else if (e.key === 'ArrowDown') {
+                    if (focused === null && rows.length) focused = rows[0].k;
+                    else {
+                        const idx = rows.findIndex(r => r.k === focused);
+                        if (idx < rows.length - 1) focused = rows[idx+1].k;
+                    }
+                    sel.clear(); sel.add(focused);
+                    e.preventDefault();
                 } else if (e.key === 'Enter') {
                     if (focused !== null) openModal(focused);
                 } else if (e.key === 'o' || e.key === 'O') {
-                    e.preventDefault();
                     domObj.focus();
-                } else if (e.key === 'c' || e.key === 'C') {
-                    e.preventDefault();
-                    domInt.focus();
                 } else if (e.key === 'm' || e.key === 'M') {
-                    e.preventDefault();
-                    mergeSelected();
+                    if (sel.size > 1) domBMerge.click();
+                } else if (e.key === 'Escape') {
+                    sel.clear(); focused = null;
+                    renderGrid();
+                    updateMergeBar();
                 }
+                renderGrid();
+                updateMergeBar();
+                updateTasksList();
             });
 
+            // ── Task Types Sidebar ──────────────────
+            function renderTaskTypes() {
+                domTypeList.innerHTML = '';
+                for (let i=0; i<TASK_TYPES.length; i++) {
+                    const t = TASK_TYPES[i];
+                    const div = document.createElement('div');
+                    div.className = 'task-type-item';
+                    div.innerHTML = `<div class="color-dot" style="background:${t.color}"></div><span>${t.name}</span>`;
+                    domTypeList.appendChild(div);
+                }
+            }
+
+            // ── Refresh all ─────────────────────────
+            function refresh() {
+                timeKeys = genKeys();
+                updateUI();
+                renderGrid();
+                domCnt.textContent = timeKeys.length;
+            }
+
+            // ── Days Button ─────────────────────────
+            domBtnAddDay.addEventListener('click', addNewDay);
+
             // ── Init ──────────────────────────────
-            domObj.value = state.objective;
-            domInt.value = state.config.interval;
-            domStart.value = state.config.start;
-            domEnd.value = state.config.end;
-
-            renderSidebar();
-            render();
-            renderTasksList();
-            updateClock();
-
-            setInterval(updateClock, 1000);
+            renderTaskTypes();
+            renderDaysList();
+            refresh();
+            setInterval(() => { domClock.textContent = new Date().toTimeString().slice(0,5); renderGrid(); }, 60000);
         })();
     </script>
 </body>
